@@ -54,37 +54,31 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface-950 flex items-center justify-center px-4">
-      {/* Background orbs */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-32 -right-32 w-80 h-80 bg-primary-600/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 -left-32 w-72 h-72 bg-purple-600/15 rounded-full blur-3xl" />
-      </div>
-
+    <div className="min-h-screen bg-[#F4F7FB] flex items-center justify-center px-4">
       <div className="relative w-full max-w-md animate-slide-up">
         {/* Card */}
-        <div className="glass border border-white/10 rounded-3xl p-8 shadow-card">
+        <div className="bg-white border border-[#BDD8E9]/80 rounded-3xl p-8 shadow-md">
 
           {/* Logo */}
           <div className="flex items-center gap-2.5 justify-center mb-8">
-            <div className="w-9 h-9 rounded-xl bg-gradient-brand flex items-center justify-center shadow-glow">
+            <div className="w-9 h-9 rounded-xl bg-[#0A4174] flex items-center justify-center shadow-sm">
               <span className="text-white font-bold text-base">C</span>
             </div>
-            <span className="font-display font-bold text-2xl text-white tracking-tight">
-              Career<span className="text-primary-400">360</span>
+            <span className="font-display font-bold text-2xl text-[#001D39] tracking-tight">
+              Career<span className="text-[#0A4174]">360</span>
             </span>
           </div>
 
-          <h1 className="text-2xl font-display font-bold text-white text-center mb-1">
+          <h1 className="text-2xl font-display font-bold text-[#001D39] text-center mb-1">
             Welcome Back
           </h1>
-          <p className="text-slate-400 text-sm text-center mb-8">
+          <p className="text-slate-500 text-sm text-center mb-8">
             Sign in to your Career360 account
           </p>
 
           {/* Server error */}
           {serverError && (
-            <div className="mb-5 px-4 py-3 rounded-xl bg-danger-500/10 border border-danger-500/30 text-sm text-danger-300">
+            <div className="mb-5 px-4 py-3 rounded-xl bg-red-50 border border-red-200 text-sm text-red-700 font-medium">
               {serverError}
             </div>
           )}
@@ -125,7 +119,7 @@ export default function LoginPage() {
                 </svg>
               }
               rightIcon={
-                <button type="button" onClick={() => setShowPw((v) => !v)} className="focus:outline-none hover:text-white transition-colors" tabIndex={-1} aria-label={showPw ? 'Hide password' : 'Show password'}>
+                <button type="button" onClick={() => setShowPw((v) => !v)} className="focus:outline-none hover:text-[#001D39] transition-colors" tabIndex={-1} aria-label={showPw ? 'Hide password' : 'Show password'}>
                   {showPw ? (
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
@@ -143,8 +137,8 @@ export default function LoginPage() {
             <div className="flex justify-end">
               <button
                 type="button"
-                className="text-xs text-primary-400 hover:text-primary-300 transition-colors"
-                onClick={() => {/* Password reset — Phase 1 architecture only */}}
+                className="text-xs text-[#0A4174] hover:text-[#001D39] font-medium transition-colors"
+                onClick={() => {/* Password reset */}}
               >
                 Forgot password?
               </button>
@@ -153,7 +147,7 @@ export default function LoginPage() {
             <Button
               id="login-submit"
               type="submit"
-              variant="gradient"
+              variant="primary"
               size="lg"
               fullWidth
               loading={loading}
@@ -162,16 +156,16 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-400">
+          <p className="mt-6 text-center text-sm text-slate-500">
             Don't have an account?{' '}
-            <Link to="/register" className="text-primary-400 hover:text-primary-300 font-semibold transition-colors">
+            <Link to="/register" className="text-[#0A4174] hover:text-[#001D39] font-semibold transition-colors">
               Create Account
             </Link>
           </p>
         </div>
 
-        <p className="mt-4 text-center text-xs text-slate-600">
-          Career360 — Your Complete Journey from Classroom to Career
+        <p className="mt-4 text-center text-xs text-slate-500">
+          Career360 — Your Complete Career &amp; Placement Intelligence Platform
         </p>
       </div>
     </div>

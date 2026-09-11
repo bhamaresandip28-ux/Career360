@@ -73,29 +73,29 @@ export default function StudentReportsPage() {
   return (
     <div className="space-y-6 max-w-5xl mx-auto pb-12">
       {/* Non-printed Screen Control Bar */}
-      <div className="print:hidden flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-900 border border-white/10 p-5 rounded-2xl shadow-xl backdrop-blur-md">
+      <div className="print:hidden flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-[#BDD8E9]/70 p-5 rounded-2xl shadow-card">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <h1 className="text-xl font-bold text-white tracking-tight">Verified Institutional Dossier</h1>
+            <h1 className="text-xl font-bold text-[#001D39] tracking-tight">Verified Institutional Dossier</h1>
             <Badge variant="success" size="sm" className="flex items-center gap-1">
               <ShieldCheck className="w-3 h-3" />
               Verified & Tamper-Evident
             </Badge>
           </div>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-600">
             Generate and export university-certified placement resumes and official academic transcripts.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
           {/* Tab toggles */}
-          <div className="bg-surface-800 p-1 rounded-xl border border-white/10 flex items-center">
+          <div className="bg-[#F4F7FB] p-1 rounded-xl border border-[#BDD8E9]/60 flex items-center">
             <button
               onClick={() => setActiveTab('cv')}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === 'cv'
-                  ? 'bg-primary-600 text-white shadow-glow'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#0A4174] text-white shadow-sm'
+                  : 'text-slate-600 hover:text-[#001D39]'
               }`}
             >
               Placement CV
@@ -104,8 +104,8 @@ export default function StudentReportsPage() {
               onClick={() => setActiveTab('transcript')}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === 'transcript'
-                  ? 'bg-primary-600 text-white shadow-glow'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#0A4174] text-white shadow-sm'
+                  : 'text-slate-600 hover:text-[#001D39]'
               }`}
             >
               Academic Transcript
@@ -116,7 +116,7 @@ export default function StudentReportsPage() {
             variant="primary"
             size="sm"
             onClick={handlePrint}
-            className="flex items-center gap-2 shadow-glow"
+            className="flex items-center gap-2 shadow-sm"
           >
             <Printer className="w-4 h-4" />
             Print / Save PDF
@@ -136,7 +136,7 @@ export default function StudentReportsPage() {
                 <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 font-display">
                   {cvData.student.name}
                 </h1>
-                <p className="text-sm font-semibold text-indigo-700 mt-1">
+                <p className="text-sm font-semibold text-[#0A4174] mt-1">
                   {cvData.student.department} • {cvData.student.batch}
                 </p>
                 <p className="text-xs text-slate-600 mt-0.5">
@@ -162,7 +162,7 @@ export default function StudentReportsPage() {
                         href={l.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-indigo-600 font-semibold hover:underline"
+                        className="text-[#0A4174] font-semibold hover:underline"
                       >
                         {l.platform}
                       </a>
@@ -195,7 +195,7 @@ export default function StudentReportsPage() {
             </div>
             <div>
               <p className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Standing</p>
-              <p className="text-xs font-bold text-indigo-700 mt-1.5 flex items-center gap-1">
+              <p className="text-xs font-bold text-[#0A4174] mt-1.5 flex items-center gap-1">
                 <CheckCircle className="w-3.5 h-3.5 text-emerald-600 inline" />
                 Verified In Good Standing
               </p>
@@ -265,7 +265,7 @@ export default function StudentReportsPage() {
                     <div className="flex justify-between items-baseline mb-0.5">
                       <span className="font-bold text-slate-900 text-sm">{proj.title}</span>
                       {proj.githubUrl && (
-                        <a href={proj.githubUrl} target="_blank" rel="noreferrer" className="text-indigo-600 hover:underline text-[11px]">
+                        <a href={proj.githubUrl} target="_blank" rel="noreferrer" className="text-[#0A4174] hover:underline text-[11px]">
                           Repository
                         </a>
                       )}
@@ -334,7 +334,7 @@ export default function StudentReportsPage() {
         <div className="bg-white text-slate-900 rounded-2xl shadow-2xl p-8 sm:p-12 border border-slate-200 print:border-none print:shadow-none print:p-0 print:rounded-none max-w-4xl mx-auto transition-all">
           {/* Institutional Header */}
           <div className="text-center border-b-2 border-slate-900 pb-6 mb-6">
-            <div className="inline-block p-3 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 mb-2">
+            <div className="inline-block p-3 rounded-full bg-[#BDD8E9]/25 border border-[#BDD8E9] text-[#0A4174] mb-2">
               <GraduationCap className="w-8 h-8 mx-auto" />
             </div>
             <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-wider text-slate-900 font-serif">
@@ -343,7 +343,7 @@ export default function StudentReportsPage() {
             <p className="text-xs font-semibold uppercase tracking-widest text-slate-600 mt-1">
               {transcriptData.institution.accreditation}
             </p>
-            <p className="text-sm font-bold text-indigo-800 uppercase tracking-widest mt-2 border-t border-b border-indigo-100 py-1 inline-block">
+            <p className="text-sm font-bold text-[#0A4174] uppercase tracking-widest mt-2 border-t border-b border-[#BDD8E9]/60 py-1 inline-block">
               {transcriptData.institution.examinationOffice} • Official Scholastic Transcript
             </p>
           </div>
@@ -369,10 +369,10 @@ export default function StudentReportsPage() {
           </div>
 
           {/* Overall Standing Summary */}
-          <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl border border-indigo-200 bg-indigo-50/50 mb-8">
+          <div className="flex flex-wrap items-center justify-between gap-4 p-4 rounded-xl border border-[#BDD8E9] bg-[#BDD8E9]/20 mb-8">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-wider text-indigo-950">Classification Awarded</p>
-              <p className="text-base font-extrabold text-indigo-800 mt-0.5">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-[#001D39]">Classification Awarded</p>
+              <p className="text-base font-extrabold text-[#0A4174] mt-0.5">
                 {transcriptData.scholasticStanding.classification}
               </p>
             </div>
@@ -383,9 +383,9 @@ export default function StudentReportsPage() {
                   {transcriptData.scholasticStanding.totalCreditsEarned} / {transcriptData.scholasticStanding.totalCreditsAttempted}
                 </p>
               </div>
-              <div className="text-right pl-4 border-l border-indigo-200">
+              <div className="text-right pl-4 border-l border-[#BDD8E9]">
                 <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Final CGPA</p>
-                <p className="text-2xl font-black text-indigo-900 font-mono">
+                <p className="text-2xl font-black text-[#001D39] font-mono">
                   {transcriptData.scholasticStanding.cgpa?.toFixed(2) ?? 'N/A'}
                 </p>
               </div>
@@ -402,7 +402,7 @@ export default function StudentReportsPage() {
                   </span>
                   <div className="flex items-center gap-4 text-xs">
                     <span className="text-slate-600 font-medium">Credits: <strong>{sem.totalCredits}</strong></span>
-                    <span className="text-indigo-800 font-bold">SGPA: <strong>{sem.sgpa?.toFixed(2) ?? 'N/A'}</strong></span>
+                    <span className="text-[#0A4174] font-bold">SGPA: <strong>{sem.sgpa?.toFixed(2) ?? 'N/A'}</strong></span>
                   </div>
                 </div>
 

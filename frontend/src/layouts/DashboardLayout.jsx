@@ -121,25 +121,25 @@ function Sidebar({ collapsed, onToggle }) {
   return (
     <aside
       className={clsx(
-        'flex flex-col h-full bg-surface-900 border-r border-white/10',
-        'transition-all duration-300 ease-in-out',
+        'flex flex-col h-full bg-[#001D39] border-r border-[#0A4174]/30',
+        'transition-all duration-300 ease-in-out z-30 shadow-lg',
         collapsed ? 'w-16' : 'w-64',
       )}
     >
       {/* Logo */}
-      <div className={clsx('flex items-center gap-3 px-4 h-16 border-b border-white/10', collapsed && 'justify-center')}>
-        <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-brand flex items-center justify-center shadow-glow">
+      <div className={clsx('flex items-center gap-3 px-4 h-16 border-b border-[#0A4174]/30 flex-shrink-0', collapsed && 'justify-center')}>
+        <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-[#0A4174] border border-[#7BBDE8]/40 flex items-center justify-center shadow-sm">
           <span className="text-white font-bold text-sm">C</span>
         </div>
         {!collapsed && (
           <span className="font-display font-bold text-white text-lg tracking-tight">
-            Career<span className="text-primary-400">360</span>
+            Career<span className="text-[#7BBDE8]">360</span>
           </span>
         )}
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto py-4 px-2 space-y-0.5">
+      <nav className="flex-1 overflow-y-auto py-4 px-2 space-y-1">
         {NAV_ITEMS.map((item) => (
           <NavLink
             key={item.to}
@@ -148,8 +148,10 @@ function Sidebar({ collapsed, onToggle }) {
             title={collapsed ? item.label : undefined}
             className={({ isActive }) =>
               clsx(
-                'sidebar-item',
-                isActive && 'active',
+                'sidebar-item flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors',
+                isActive
+                  ? 'bg-[#0A4174] text-white font-semibold border border-[#7BBDE8]/40 shadow-sm'
+                  : 'text-[#BDD8E9] hover:text-white hover:bg-[#0A4174]/40',
                 collapsed && 'justify-center px-2',
               )
             }
@@ -159,7 +161,7 @@ function Sidebar({ collapsed, onToggle }) {
               <>
                 <span className="flex-1 truncate">{item.label}</span>
                 {item.badge && (
-                  <Badge variant="slate" size="sm">{item.badge}</Badge>
+                  <Badge variant="primary" size="sm">{item.badge}</Badge>
                 )}
               </>
             )}
@@ -169,10 +171,10 @@ function Sidebar({ collapsed, onToggle }) {
 
       {/* Phase indicator */}
       {!collapsed && (
-        <div className="px-4 py-3 border-t border-white/10">
+        <div className="px-4 py-3 border-t border-[#0A4174]/30">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-accent-400 animate-pulse-slow" />
-            <span className="text-xs text-slate-500 font-medium">Phase 0 — Foundation</span>
+            <span className="w-2 h-2 rounded-full bg-[#7BBDE8] animate-pulse-slow" />
+            <span className="text-xs text-[#BDD8E9]/70 font-medium">Career360 Active</span>
           </div>
         </div>
       )}
@@ -181,14 +183,17 @@ function Sidebar({ collapsed, onToggle }) {
       <button
         onClick={onToggle}
         className={clsx(
-          'flex items-center justify-center h-10 border-t border-white/10',
-          'text-slate-400 hover:text-white hover:bg-white/5 transition-colors',
+          'flex items-center justify-center h-10 border-t border-[#0A4174]/30',
+          'text-[#BDD8E9] hover:text-white hover:bg-[#0A4174]/30 transition-colors',
         )}
-        aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+        title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
       >
         <svg
           className={clsx('h-4 w-4 transition-transform duration-300', collapsed && 'rotate-180')}
-          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
         >
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
@@ -197,53 +202,36 @@ function Sidebar({ collapsed, onToggle }) {
   );
 }
 
-// ─── Top Navigation ───────────────────────────────────────────────────────────
-function TopNav({ onMenuToggle }) {
+// ─── Top Header Component ─────────────────────────────────────────────────────
+function Header({ onToggleSidebar }) {
   const location = useLocation();
-
-  // Derive page title from path
   const pathParts = location.pathname.replace('/dashboard', '').split('/').filter(Boolean);
   const pageTitle = pathParts.length
     ? pathParts[pathParts.length - 1].charAt(0).toUpperCase() + pathParts[pathParts.length - 1].slice(1)
     : 'Dashboard';
 
   return (
-    <header className="h-16 flex items-center justify-between px-6 border-b border-white/10 bg-surface-900/80 backdrop-blur-sm">
-      {/* Left: mobile menu + breadcrumb */}
-      <div className="flex items-center gap-4">
+    <header className="h-16 flex items-center justify-between px-6 border-b border-slate-200 bg-white shadow-sm flex-shrink-0 z-20">
+      <div className="flex items-center gap-3">
         <button
-          onClick={onMenuToggle}
-          className="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-          aria-label="Toggle menu"
+          onClick={onToggleSidebar}
+          className="md:hidden text-slate-500 hover:text-[#001D39] p-1.5 rounded-lg hover:bg-[#BDD8E9]/20"
         >
           <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
         </button>
         <div>
-          <h1 className="text-base font-semibold text-white">{pageTitle}</h1>
+          <h1 className="text-base font-semibold text-[#001D39]">{pageTitle}</h1>
           <p className="text-xs text-slate-500 hidden sm:block">
             Career360 &rsaquo; {pageTitle}
           </p>
         </div>
       </div>
 
-      {/* Right: actions */}
       <div className="flex items-center gap-3">
-        {/* Notifications placeholder */}
-        <button
-          className="relative p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-          aria-label="Notifications"
-          title="Notifications — Phase 1"
-        >
-          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-          </svg>
-        </button>
-
-        {/* Avatar placeholder */}
-        <div className="w-8 h-8 rounded-full bg-gradient-brand flex items-center justify-center shadow-glow cursor-pointer" title="Profile — Phase 1">
-          <span className="text-white text-xs font-bold">S</span>
+        <div className="w-8 h-8 rounded-full bg-[#0A4174] flex items-center justify-center text-white text-xs font-bold shadow-sm">
+          <span>S</span>
         </div>
       </div>
     </header>
@@ -255,16 +243,16 @@ export default function DashboardLayout() {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-surface-950">
+    <div className="flex h-screen overflow-hidden bg-[#F4F7FB]">
       {/* Sidebar */}
       <Sidebar collapsed={collapsed} onToggle={() => setCollapsed((c) => !c)} />
 
       {/* Main area */}
       <div className="flex flex-col flex-1 overflow-hidden">
-        <TopNav onMenuToggle={() => setCollapsed((c) => !c)} />
+        <Header onToggleSidebar={() => setCollapsed((c) => !c)} />
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto p-6 bg-[#F4F7FB]">
           <Outlet />
         </main>
       </div>

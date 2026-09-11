@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 
 /**
- * Loading — full-screen or inline loading spinner.
+ * Loading — Career360 loading spinner.
  */
 export default function Loading({ fullScreen = false, size = 'md', label = 'Loading...' }) {
   const sizes = {
@@ -15,17 +15,17 @@ export default function Loading({ fullScreen = false, size = 'md', label = 'Load
     <div className="flex flex-col items-center gap-3">
       <div
         className={clsx(
-          'rounded-full border-white/10 border-t-primary-500 animate-spin',
+          'rounded-full border-slate-200 border-t-[#0A4174] animate-spin',
           sizes[size],
         )}
       />
-      {label && <p className="text-sm text-slate-400 animate-pulse">{label}</p>}
+      {label && <p className="text-sm text-[#001D39] font-medium animate-pulse">{label}</p>}
     </div>
   );
 
   if (fullScreen) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-surface-950/90 backdrop-blur-sm">
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm">
         {spinner}
       </div>
     );

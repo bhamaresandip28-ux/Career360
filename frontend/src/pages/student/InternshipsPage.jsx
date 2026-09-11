@@ -156,15 +156,15 @@ export default function InternshipsPage() {
       )}
 
       {/* Header Banner */}
-      <div className="glass p-6 bg-gradient-card border border-white/10 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="p-6 bg-white border border-[#BDD8E9]/70 rounded-2xl shadow-card flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h2 className="font-display font-bold text-2xl text-white">Work Experience & Internships</h2>
-          <p className="text-slate-400 text-sm mt-1 max-w-xl">
+          <h2 className="font-display font-bold text-2xl text-[#001D39]">Work Experience & Internships</h2>
+          <p className="text-slate-600 text-sm mt-1 max-w-xl">
             Real industry exposure, corporate traineeships, and research internships demonstrate professional readiness.
           </p>
-          <div className="flex items-center gap-4 mt-3 text-xs text-slate-300">
-            <span>Total Internships: <strong className="text-white">{internships.length}</strong></span>
-            <span>• Ongoing: <strong className="text-accent-400">{internships.filter(i => !i.endDate).length}</strong></span>
+          <div className="flex items-center gap-4 mt-3 text-xs text-slate-500">
+            <span>Total Internships: <strong className="text-[#001D39]">{internships.length}</strong></span>
+            <span>• Ongoing: <strong className="text-[#4E8EA2]">{internships.filter(i => !i.endDate).length}</strong></span>
           </div>
         </div>
         <Button variant="primary" onClick={openAddModal} className="flex-shrink-0">
@@ -193,16 +193,16 @@ export default function InternshipsPage() {
             return (
               <div
                 key={item.id}
-                className="glass p-6 rounded-2xl border border-white/10 hover:border-primary-500/30 transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-5"
+                className="p-6 bg-white rounded-2xl border border-[#BDD8E9]/70 shadow-card hover:border-[#0A4174]/40 transition-all flex flex-col md:flex-row items-start md:items-center justify-between gap-5"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary-500/10 border border-primary-500/20 flex items-center justify-center text-xl flex-shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-[#BDD8E9]/25 border border-[#BDD8E9] flex items-center justify-center text-xl flex-shrink-0">
                     🏢
                   </div>
                   <div>
                     <div className="flex items-center gap-3 flex-wrap">
-                      <h3 className="font-semibold text-white text-lg">{item.role}</h3>
-                      <span className="text-slate-400 font-medium">@ {item.organization}</span>
+                      <h3 className="font-semibold text-[#001D39] text-lg">{item.role}</h3>
+                      <span className="text-slate-600 font-medium">@ {item.organization}</span>
                       {isCurrent ? (
                         <Badge variant="success" size="sm" dot>Present / Ongoing</Badge>
                       ) : (
@@ -210,7 +210,7 @@ export default function InternshipsPage() {
                       )}
                     </div>
 
-                    <p className="text-xs text-slate-400 mt-1">
+                    <p className="text-xs text-slate-500 mt-1">
                       {new Date(item.startDate).toLocaleDateString(undefined, { month: 'short', year: 'numeric' })}
                       {' — '}
                       {isCurrent
@@ -219,7 +219,7 @@ export default function InternshipsPage() {
                     </p>
 
                     {item.description && (
-                      <p className="text-sm text-slate-300 mt-3 max-w-2xl leading-relaxed">
+                      <p className="text-sm text-slate-600 mt-3 max-w-2xl leading-relaxed">
                         {item.description}
                       </p>
                     )}
@@ -229,7 +229,7 @@ export default function InternshipsPage() {
                         {item.techStack.map((tech, i) => (
                           <span
                             key={i}
-                            className="px-2 py-0.5 rounded-lg bg-white/5 border border-white/10 text-[11px] text-slate-300 font-mono"
+                            className="px-2 py-0.5 rounded-lg bg-[#BDD8E9]/20 border border-[#BDD8E9]/60 text-[11px] text-[#0A4174] font-mono font-medium"
                           >
                             {tech}
                           </span>
@@ -245,20 +245,20 @@ export default function InternshipsPage() {
                       href={item.verificationUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-xs text-accent-400 hover:text-accent-300 font-medium px-3 py-1.5 rounded-xl bg-accent-500/10 border border-accent-500/20 transition-all flex items-center gap-1"
+                      className="text-xs text-[#0A4174] hover:text-[#001D39] font-medium px-3 py-1.5 rounded-xl bg-[#BDD8E9]/25 border border-[#BDD8E9] transition-all flex items-center gap-1"
                     >
                       <span>Offer / Certificate ↗</span>
                     </a>
                   )}
                   <button
                     onClick={() => openEditModal(item)}
-                    className="text-xs text-slate-400 hover:text-primary-400 p-2 transition-colors"
+                    className="text-xs text-slate-500 hover:text-[#0A4174] p-2 transition-colors"
                   >
                     Edit ✏️
                   </button>
                   <button
                     onClick={() => setDeletingInternship(item)}
-                    className="text-xs text-slate-400 hover:text-danger-400 p-2 transition-colors"
+                    className="text-xs text-slate-500 hover:text-rose-600 p-2 transition-colors"
                   >
                     Delete 🗑️
                   </button>
@@ -315,28 +315,28 @@ export default function InternshipsPage() {
               />
             ) : (
               <div className="flex flex-col justify-center">
-                <span className="text-sm text-slate-400 mt-6">Role is currently active</span>
+                <span className="text-sm text-slate-500 mt-6">Role is currently active</span>
               </div>
             )}
           </div>
 
-          <div className="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
+          <div className="flex items-center gap-3 p-3 bg-[#F4F7FB] rounded-xl border border-[#BDD8E9]/60">
             <input
               type="checkbox"
               id="isOngoing"
               checked={isOngoing}
               onChange={(e) => setIsOngoing(e.target.checked)}
-              className="w-4 h-4 rounded text-primary-500 focus:ring-primary-500"
+              className="w-4 h-4 rounded text-[#0A4174] focus:ring-[#0A4174]"
             />
-            <label htmlFor="isOngoing" className="text-sm font-medium text-slate-300 cursor-pointer">
+            <label htmlFor="isOngoing" className="text-sm font-medium text-slate-700 cursor-pointer">
               I am currently working in this internship role
             </label>
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-slate-300">Description of Work</label>
+            <label className="text-sm font-medium text-slate-700">Description of Work</label>
             <textarea
-              className="w-full rounded-xl bg-white/5 border border-white/10 text-sm text-white placeholder-slate-500 p-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+              className="w-full rounded-xl bg-white border border-slate-300 text-sm text-[#001D39] placeholder-slate-400 p-3 focus:outline-none focus:ring-2 focus:ring-[#0A4174]"
               rows={3}
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -361,7 +361,7 @@ export default function InternshipsPage() {
             placeholder="https://..."
           />
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
             <Button
               type="button"
               variant="outline"
@@ -385,7 +385,7 @@ export default function InternshipsPage() {
         size="sm"
       >
         <div className="space-y-4">
-          <p className="text-sm text-slate-300">
+          <p className="text-sm text-slate-600">
             Are you sure you want to remove internship at <strong>{deletingInternship?.organization}</strong>?
           </p>
           <div className="flex justify-end gap-3 pt-2">

@@ -165,39 +165,39 @@ export default function PreparationHubPage() {
       {toast && <Toast type={toast.type} message={toast.message} onClose={() => setToast(null)} />}
 
       {/* Header Banner & Preparation Progress Ring */}
-      <div className="glass p-6 bg-gradient-card border border-white/10 rounded-2xl">
+      <div className="p-6 bg-white border border-[#BDD8E9]/70 shadow-card rounded-2xl">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <Badge variant="purple" size="sm">Placement Preparation Hub</Badge>
-              <span className="text-xs text-slate-400">• Curated Technical & Interview Syllabus</span>
+              <Badge variant="primary" size="sm">Placement Preparation Hub</Badge>
+              <span className="text-xs text-slate-500">• Curated Technical & Interview Syllabus</span>
             </div>
-            <h1 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            <h1 className="font-display text-2xl sm:text-3xl font-bold text-[#001D39] tracking-tight">
               Placement Preparation & Practice Hub
             </h1>
-            <p className="text-sm text-slate-300 mt-1 max-w-2xl">
+            <p className="text-sm text-slate-600 mt-1 max-w-2xl">
               Sharpen your Data Structures, System Architecture, Core CS fundamentals, and Aptitude drills.
               Track your preparation hours and conquer mock technical drives.
             </p>
           </div>
 
           {/* KPI Mini Matrix */}
-          <div className="grid grid-cols-3 gap-3 bg-surface-900/80 p-4 rounded-xl border border-white/10 text-center min-w-[320px]">
+          <div className="grid grid-cols-3 gap-3 bg-[#F4F7FB] p-4 rounded-xl border border-[#BDD8E9]/60 text-center min-w-[320px]">
             <div>
-              <span className="text-[10px] uppercase font-bold text-slate-400 block">Modules</span>
-              <span className="text-lg font-bold text-white">
+              <span className="text-[10px] uppercase font-bold text-slate-500 block">Modules</span>
+              <span className="text-lg font-bold text-[#001D39]">
                 {summary.completedModules || 0}/{summary.totalModules || 0}
               </span>
             </div>
-            <div className="border-x border-white/10">
-              <span className="text-[10px] uppercase font-bold text-slate-400 block">Prep Time</span>
-              <span className="text-lg font-bold text-primary-400">
+            <div className="border-x border-[#BDD8E9]/60">
+              <span className="text-[10px] uppercase font-bold text-slate-500 block">Prep Time</span>
+              <span className="text-lg font-bold text-[#0A4174]">
                 {summary.completedHours || 0}h / {summary.totalHours || 0}h
               </span>
             </div>
             <div>
-              <span className="text-[10px] uppercase font-bold text-slate-400 block">Progress</span>
-              <span className="text-lg font-bold text-accent-400">
+              <span className="text-[10px] uppercase font-bold text-slate-500 block">Progress</span>
+              <span className="text-lg font-bold text-[#4E8EA2]">
                 {summary.progressPercentage || 0}%
               </span>
             </div>
@@ -215,8 +215,8 @@ export default function PreparationHubPage() {
               onClick={() => setSelectedCategory(cat.key)}
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 selectedCategory === cat.key
-                  ? 'bg-primary-600 text-white shadow-glow'
-                  : 'bg-surface-900 border border-white/10 text-slate-400 hover:text-white hover:bg-white/5'
+                  ? 'bg-[#0A4174] text-white shadow-sm'
+                  : 'bg-white border border-[#BDD8E9]/70 text-slate-600 hover:text-[#001D39] hover:bg-slate-50'
               }`}
             >
               <span>{cat.icon}</span>
@@ -226,28 +226,28 @@ export default function PreparationHubPage() {
         </div>
 
         {/* Secondary Controls: Search & Difficulty Filter */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-surface-900/40 p-3 rounded-xl border border-white/5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-3 rounded-xl border border-[#BDD8E9]/70 shadow-sm">
           <div className="relative flex-1 max-w-md">
             <input
               type="text"
               placeholder="Search topics (e.g., Two Pointers, B-Trees, Kafka)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-3 py-1.5 pl-8 bg-surface-950 border border-white/10 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-primary-500"
+              className="w-full px-3 py-1.5 pl-8 bg-slate-50 border border-[#BDD8E9]/60 rounded-lg text-xs text-[#001D39] placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#0A4174]"
             />
-            <span className="absolute left-2.5 top-2 text-slate-500 text-xs">🔍</span>
+            <span className="absolute left-2.5 top-2 text-slate-400 text-xs">🔍</span>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs text-slate-400">Difficulty:</span>
+            <span className="text-xs text-slate-500">Difficulty:</span>
             {['ALL', 'EASY', 'MEDIUM', 'HARD'].map((diff) => (
               <button
                 key={diff}
                 onClick={() => setSelectedDifficulty(diff)}
                 className={`text-[11px] font-semibold px-2.5 py-1 rounded-md transition-colors ${
                   selectedDifficulty === diff
-                    ? 'bg-white/15 text-white'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                    ? 'bg-[#0A4174] text-white'
+                    : 'text-slate-600 hover:text-[#001D39] hover:bg-slate-100'
                 }`}
               >
                 {diff}
@@ -265,7 +265,7 @@ export default function PreparationHubPage() {
       ) : error ? (
         <ErrorState title="Failed to Load Modules" message={error} onRetry={fetchCatalog} />
       ) : filteredResources.length === 0 ? (
-        <div className="text-center py-16 text-slate-400 bg-surface-900/30 rounded-2xl border border-white/5">
+        <div className="text-center py-16 text-slate-500 bg-white rounded-2xl border border-[#BDD8E9]/70 shadow-sm">
           <p className="text-base">No preparation resources match your criteria.</p>
           <Button
             variant="ghost"
@@ -275,7 +275,7 @@ export default function PreparationHubPage() {
               setSelectedDifficulty('ALL');
               setSearchQuery('');
             }}
-            className="mt-3 text-xs text-primary-400"
+            className="mt-3 text-xs text-[#0A4174]"
           >
             Clear filters
           </Button>
@@ -291,31 +291,31 @@ export default function PreparationHubPage() {
                 key={resource.id}
                 className={`flex flex-col justify-between transition-all ${
                   isCompleted
-                    ? 'border-emerald-500/30 bg-emerald-500/[0.02]'
-                    : 'hover:border-white/20'
+                    ? 'border-emerald-300 bg-emerald-50/30'
+                    : 'hover:border-[#0A4174]/40'
                 }`}
               >
                 <div>
                   {/* Card Top: Category & Difficulty */}
                   <div className="flex items-center justify-between mb-2.5">
-                    <Badge variant="purple" size="sm" className="text-[10px]">
+                    <Badge variant="primary" size="sm" className="text-[10px]">
                       {resource.category.replace('_', ' ')}
                     </Badge>
                     <div className="flex items-center gap-2">
                       <Badge variant={DIFFICULTY_COLORS[resource.difficulty] || 'slate'} size="sm" className="text-[10px]">
                         {resource.difficulty}
                       </Badge>
-                      <span className="text-[11px] text-slate-400 font-mono">
+                      <span className="text-[11px] text-slate-500 font-mono">
                         ⏱️ {resource.estimatedHours}h
                       </span>
                     </div>
                   </div>
 
                   {/* Title & Description */}
-                  <h3 className="text-base font-semibold text-white tracking-tight mb-1.5 line-clamp-2">
+                  <h3 className="text-base font-semibold text-[#001D39] tracking-tight mb-1.5 line-clamp-2">
                     {resource.title}
                   </h3>
-                  <p className="text-xs text-slate-400 line-clamp-3 leading-relaxed mb-4">
+                  <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed mb-4">
                     {resource.description}
                   </p>
 
@@ -325,7 +325,7 @@ export default function PreparationHubPage() {
                       {resource.tags.map((tag, i) => (
                         <span
                           key={i}
-                          className="px-2 py-0.5 rounded-md bg-surface-950 text-[10px] text-slate-400 border border-white/5 font-mono"
+                          className="px-2 py-0.5 rounded-md bg-[#BDD8E9]/20 text-[10px] text-[#0A4174] border border-[#BDD8E9]/60 font-mono font-medium"
                         >
                           #{tag}
                         </span>
@@ -335,22 +335,22 @@ export default function PreparationHubPage() {
                 </div>
 
                 {/* Card Action Footer */}
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-2">
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     {resource.contentUrl && (
                       <a
                         href={resource.contentUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-primary-400 hover:text-primary-300 transition-colors"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-[#0A4174] hover:text-[#001D39] transition-colors"
                       >
                         Practice ↗
                       </a>
                     )}
                     <button
                       onClick={() => handleOpenNotes(resource)}
-                      className={`text-xs p-1 rounded hover:text-white transition-colors ${
-                        hasNotes ? 'text-accent-400' : 'text-slate-500'
+                      className={`text-xs p-1 rounded transition-colors ${
+                        hasNotes ? 'text-[#0A4174] font-semibold' : 'text-slate-400 hover:text-slate-600'
                       }`}
                       title={hasNotes ? 'View/edit your notes' : 'Add study notes'}
                     >
@@ -363,7 +363,7 @@ export default function PreparationHubPage() {
                     size="sm"
                     onClick={() => handleToggleStatus(resource)}
                     className={`text-xs py-1 px-3 ${
-                      isCompleted ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' : ''
+                      isCompleted ? 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100' : ''
                     }`}
                   >
                     {isCompleted ? '✓ Completed' : 'Mark Done'}
@@ -383,7 +383,7 @@ export default function PreparationHubPage() {
         size="md"
       >
         <form onSubmit={handleSaveNotes} className="space-y-4">
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-slate-600">
             Jot down key takeaways, code snippets, or revision shortcuts for this topic:
           </p>
           <textarea
@@ -391,10 +391,10 @@ export default function PreparationHubPage() {
             value={noteText}
             onChange={(e) => setNoteText(e.target.value)}
             placeholder="e.g. Mastered the sliding window template: windowEnd expands, windowStart contracts when condition is violated..."
-            className="w-full px-3 py-2 bg-surface-950 border border-white/10 rounded-xl text-xs text-white focus:ring-2 focus:ring-primary-500 focus:outline-none font-mono"
+            className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs text-[#001D39] placeholder-slate-400 focus:ring-2 focus:ring-[#0A4174] focus:border-[#0A4174] focus:outline-none font-mono"
           />
 
-          <div className="flex items-center justify-end gap-3 pt-3 border-t border-white/10">
+          <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-100">
             <Button
               type="button"
               variant="ghost"

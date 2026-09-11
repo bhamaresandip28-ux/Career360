@@ -30,17 +30,17 @@ const FILTER_TABS = [
 function getNotificationIcon(type) {
   switch (type) {
     case 'DRIVE_ANNOUNCEMENT':
-      return <Briefcase className="w-5 h-5 text-indigo-400" />;
+      return <Briefcase className="w-5 h-5 text-[#0A4174]" />;
     case 'INTERVIEW_ROUND':
-      return <Calendar className="w-5 h-5 text-amber-400" />;
+      return <Calendar className="w-5 h-5 text-amber-500" />;
     case 'OFFER_ISSUED':
-      return <Award className="w-5 h-5 text-purple-400" />;
+      return <Award className="w-5 h-5 text-[#4E8EA2]" />;
     case 'ACADEMIC_ALERT':
-      return <AlertTriangle className="w-5 h-5 text-rose-400" />;
+      return <AlertTriangle className="w-5 h-5 text-rose-500" />;
     case 'SUCCESS':
-      return <Check className="w-5 h-5 text-emerald-400" />;
+      return <Check className="w-5 h-5 text-emerald-500" />;
     default:
-      return <Info className="w-5 h-5 text-blue-400" />;
+      return <Info className="w-5 h-5 text-[#49769F]" />;
   }
 }
 
@@ -116,13 +116,13 @@ export default function NotificationsPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="space-y-6 max-w-5xl mx-auto p-6">
       {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-surface-900 to-surface-850 p-6 rounded-2xl border border-white/10 shadow-xl">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-[#BDD8E9]/70 shadow-sm">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
-              <Bell className="w-6 h-6 text-primary-400" />
+            <h1 className="text-2xl font-bold text-[#001D39] tracking-tight flex items-center gap-2">
+              <Bell className="w-6 h-6 text-[#0A4174]" />
               Notifications & Alerts
             </h1>
             {unreadCount > 0 && (
@@ -131,7 +131,7 @@ export default function NotificationsPage() {
               </Badge>
             )}
           </div>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="text-slate-500 text-sm mt-1">
             Stay updated with campus recruitment announcements, interview schedules, and scholastic alerts.
           </p>
         </div>
@@ -150,7 +150,7 @@ export default function NotificationsPage() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-white/10 pb-3">
+      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-3">
         {FILTER_TABS.map((tab) => (
           <button
             key={tab.id}
@@ -160,8 +160,8 @@ export default function NotificationsPage() {
             }}
             className={`px-4 py-2 text-xs font-semibold rounded-xl transition-all ${
               activeTab === tab.id
-                ? 'bg-primary-600 text-white shadow-glow'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-[#0A4174] text-white shadow-sm'
+                : 'text-[#49769F] hover:text-[#001D39] hover:bg-[#BDD8E9]/20'
             }`}
           >
             {tab.label}
@@ -172,14 +172,14 @@ export default function NotificationsPage() {
       {/* Notifications List */}
       <div className="space-y-3">
         {loading ? (
-          <div className="text-center py-16 text-slate-400">Loading alerts...</div>
+          <div className="text-center py-16 text-slate-500">Loading alerts...</div>
         ) : notifications.length === 0 ? (
-          <Card className="text-center py-16">
-            <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-3 text-slate-400">
+          <Card className="text-center py-16 bg-white border border-[#BDD8E9]/70">
+            <div className="w-12 h-12 rounded-full bg-[#BDD8E9]/30 flex items-center justify-center mx-auto mb-3 text-[#0A4174]">
               <Bell className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-semibold text-white">No notifications found</h3>
-            <p className="text-slate-400 text-xs mt-1">
+            <h3 className="text-base font-semibold text-[#001D39]">No notifications found</h3>
+            <p className="text-slate-500 text-xs mt-1">
               You're all caught up with your notifications!
             </p>
           </Card>
@@ -190,36 +190,36 @@ export default function NotificationsPage() {
               onClick={() => handleMarkAsRead(n.id, n.targetUrl)}
               className={`group flex items-start justify-between gap-4 p-4 rounded-2xl border transition-all cursor-pointer ${
                 !n.isRead
-                  ? 'bg-surface-850/90 border-primary-500/30 hover:border-primary-500/60 shadow-md'
-                  : 'bg-surface-900/60 border-white/5 hover:border-white/15'
+                  ? 'bg-[#E1EFF8]/50 border-[#BDD8E9] hover:border-[#0A4174] shadow-sm'
+                  : 'bg-white border-slate-200 hover:border-[#BDD8E9]'
               }`}
             >
               <div className="flex items-start gap-3.5 flex-1 min-w-0">
-                <div className="p-2.5 rounded-xl bg-surface-800 border border-white/10 flex-shrink-0">
+                <div className="p-2.5 rounded-xl bg-white border border-[#BDD8E9]/70 flex-shrink-0 shadow-xs">
                   {getNotificationIcon(n.type)}
                 </div>
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap mb-1">
                     <h4 className={`text-sm font-semibold truncate ${
-                      !n.isRead ? 'text-white font-bold' : 'text-slate-200'
+                      !n.isRead ? 'text-[#001D39] font-bold' : 'text-slate-700'
                     }`}>
                       {n.title}
                     </h4>
                     {!n.isRead && (
-                      <span className="w-2 h-2 rounded-full bg-primary-400" />
+                      <span className="w-2 h-2 rounded-full bg-[#0A4174]" />
                     )}
-                    <span className="text-[11px] text-slate-400">
+                    <span className="text-[11px] text-slate-500">
                       • {new Date(n.createdAt).toLocaleDateString()} at {new Date(n.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-300 leading-relaxed max-w-3xl">
+                  <p className="text-xs text-slate-600 leading-relaxed max-w-3xl">
                     {n.message}
                   </p>
 
                   {n.targetUrl && (
-                    <span className="inline-flex items-center gap-1 text-xs text-primary-400 hover:text-primary-300 mt-2 font-medium">
+                    <span className="inline-flex items-center gap-1 text-xs text-[#0A4174] hover:underline mt-2 font-medium">
                       <span>View details</span>
                       <ExternalLink className="w-3 h-3" />
                     </span>
@@ -235,7 +235,7 @@ export default function NotificationsPage() {
                       handleMarkAsRead(n.id);
                     }}
                     title="Mark as read"
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition"
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-[#001D39] hover:bg-[#BDD8E9]/30 transition"
                   >
                     <Check className="w-4 h-4" />
                   </button>
@@ -243,7 +243,7 @@ export default function NotificationsPage() {
                 <button
                   onClick={(e) => handleDelete(e, n.id)}
                   title="Dismiss notification"
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -264,7 +264,7 @@ export default function NotificationsPage() {
           >
             Previous
           </Button>
-          <span className="text-xs text-slate-400 font-medium">
+          <span className="text-xs text-slate-500 font-medium">
             Page {page} of {totalPages}
           </span>
           <Button

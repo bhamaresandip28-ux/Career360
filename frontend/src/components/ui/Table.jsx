@@ -1,11 +1,12 @@
 import { clsx } from 'clsx';
 
 /**
- * Table — responsive data table component.
+ * Table — Career360 responsive data table component.
+ * Features: Clean white surface, #F8FAFC header with #001D39 labels, subtle #BDD8E9/15 hover row.
  */
 export default function Table({ children, className = '' }) {
   return (
-    <div className="w-full overflow-x-auto rounded-xl border border-white/10">
+    <div className="w-full overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
       <table className={clsx('w-full text-sm text-left', className)}>
         {children}
       </table>
@@ -15,7 +16,7 @@ export default function Table({ children, className = '' }) {
 
 Table.Head = function TableHead({ children }) {
   return (
-    <thead className="bg-white/5 border-b border-white/10">
+    <thead className="bg-[#F8FAFC] border-b border-slate-200">
       {children}
     </thead>
   );
@@ -23,7 +24,7 @@ Table.Head = function TableHead({ children }) {
 
 Table.Body = function TableBody({ children }) {
   return (
-    <tbody className="divide-y divide-white/5">
+    <tbody className="divide-y divide-slate-100">
       {children}
     </tbody>
   );
@@ -36,7 +37,7 @@ Table.Row = function TableRow({ children, className = '', onClick }) {
       className={clsx(
         'transition-colors duration-150',
         onClick && 'cursor-pointer',
-        'hover:bg-white/5',
+        'hover:bg-[#BDD8E9]/15',
         className,
       )}
     >
@@ -47,7 +48,7 @@ Table.Row = function TableRow({ children, className = '', onClick }) {
 
 Table.Th = function TableTh({ children, className = '' }) {
   return (
-    <th className={clsx('px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider whitespace-nowrap', className)}>
+    <th className={clsx('px-4 py-3 text-xs font-semibold text-[#001D39] uppercase tracking-wider whitespace-nowrap', className)}>
       {children}
     </th>
   );
@@ -55,7 +56,7 @@ Table.Th = function TableTh({ children, className = '' }) {
 
 Table.Td = function TableTd({ children, className = '' }) {
   return (
-    <td className={clsx('px-4 py-3 text-slate-300', className)}>
+    <td className={clsx('px-4 py-3.5 text-slate-700 text-xs', className)}>
       {children}
     </td>
   );

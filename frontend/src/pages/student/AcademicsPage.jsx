@@ -238,19 +238,19 @@ export default function AcademicsPage() {
       )}
 
       {/* ─── Hero Scorecard ──────────────────────────────────────────────── */}
-      <div className="glass p-6 bg-gradient-card border border-white/10 rounded-2xl">
+      <div className="p-6 bg-white border border-[#BDD8E9]/70 rounded-2xl shadow-card">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                 Academic Management & Intelligence
               </span>
               <Badge variant="primary" size="sm" dot>Verified</Badge>
             </div>
-            <h2 className="font-display font-bold text-2xl text-white">
+            <h2 className="font-display font-bold text-2xl text-[#001D39]">
               Scholastic Standing & Performance
             </h2>
-            <p className="text-slate-400 text-sm mt-1 max-w-xl">
+            <p className="text-slate-600 text-sm mt-1 max-w-xl">
               Track SGPA semester progression, overall degree CGPA, attendance thresholds, and backlog clearances for placement drive eligibility.
             </p>
           </div>
@@ -264,14 +264,14 @@ export default function AcademicsPage() {
 
         {/* Metric Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-          <div className="p-4 rounded-xl bg-white/5 border border-white/5 flex flex-col justify-between">
+          <div className="p-4 rounded-xl bg-[#F4F7FB] border border-[#BDD8E9]/60 flex flex-col justify-between">
             <div>
-              <span className="text-xs text-slate-400 block">Cumulative GPA</span>
+              <span className="text-xs text-slate-500 block">Cumulative GPA</span>
               <div className="flex items-baseline gap-2 mt-1">
-                <span className="text-3xl font-bold text-accent-400">
+                <span className="text-3xl font-bold text-[#0A4174]">
                   {summary?.cgpa != null ? summary.cgpa.toFixed(2) : '—'}
                 </span>
-                <span className="text-xs text-slate-500">/ 10.0</span>
+                <span className="text-xs text-slate-400">/ 10.0</span>
               </div>
             </div>
             <div className="mt-2">
@@ -281,33 +281,33 @@ export default function AcademicsPage() {
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-white/5 border border-white/5 flex flex-col justify-between">
+          <div className="p-4 rounded-xl bg-[#F4F7FB] border border-[#BDD8E9]/60 flex flex-col justify-between">
             <div>
-              <span className="text-xs text-slate-400 block">Latest SGPA</span>
+              <span className="text-xs text-slate-500 block">Latest SGPA</span>
               <div className="flex items-baseline gap-2 mt-1">
-                <span className="text-3xl font-bold text-primary-400">
+                <span className="text-3xl font-bold text-[#0A4174]">
                   {summary?.latestSgpa != null ? summary.latestSgpa.toFixed(2) : '—'}
                 </span>
-                <span className="text-xs text-slate-500">Last sem</span>
+                <span className="text-xs text-slate-400">Last sem</span>
               </div>
             </div>
             <div className="mt-2">
-              <span className="text-xs text-slate-400">
+              <span className="text-xs text-slate-500">
                 {semesters.length} Semesters logged
               </span>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-white/5 border border-white/5 flex flex-col justify-between">
+          <div className="p-4 rounded-xl bg-[#F4F7FB] border border-[#BDD8E9]/60 flex flex-col justify-between">
             <div>
-              <span className="text-xs text-slate-400 block">Aggregate Attendance</span>
+              <span className="text-xs text-slate-500 block">Aggregate Attendance</span>
               <div className="flex items-baseline gap-2 mt-1">
                 <span className={`text-3xl font-bold ${
                   summary?.overallAttendance >= 85
-                    ? 'text-accent-400'
+                    ? 'text-emerald-600'
                     : summary?.overallAttendance >= 75
-                    ? 'text-primary-400'
-                    : 'text-danger-400'
+                    ? 'text-[#0A4174]'
+                    : 'text-rose-600'
                 }`}>
                   {summary?.overallAttendance != null ? `${summary.overallAttendance}%` : '—'}
                 </span>
@@ -320,14 +320,14 @@ export default function AcademicsPage() {
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-white/5 border border-white/5 flex flex-col justify-between">
+          <div className="p-4 rounded-xl bg-[#F4F7FB] border border-[#BDD8E9]/60 flex flex-col justify-between">
             <div>
-              <span className="text-xs text-slate-400 block">Backlog Status</span>
+              <span className="text-xs text-slate-500 block">Backlog Status</span>
               <div className="flex items-baseline gap-2 mt-1">
-                <span className={`text-3xl font-bold ${summary?.activeBacklogs > 0 ? 'text-danger-400' : 'text-accent-400'}`}>
+                <span className={`text-3xl font-bold ${summary?.activeBacklogs > 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
                   {summary?.activeBacklogs ?? 0}
                 </span>
-                <span className="text-xs text-slate-500">active</span>
+                <span className="text-xs text-slate-400">active</span>
               </div>
             </div>
             <div className="mt-2">
@@ -350,10 +350,10 @@ export default function AcademicsPage() {
                   <Card.Title>Semester SGPA Trajectory</Card.Title>
                   <Card.Description>Grade point progression across registered semesters</Card.Description>
                 </div>
-                <div className="flex items-center gap-2 text-xs text-slate-400">
-                  <span className="w-2.5 h-2.5 rounded-full bg-primary-500 inline-block" />
+                <div className="flex items-center gap-2 text-xs text-slate-500">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#0A4174] inline-block" />
                   <span>SGPA</span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-accent-400 inline-block ml-2" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#4E8EA2] inline-block ml-2" />
                   <span>Benchmark (8.0)</span>
                 </div>
               </div>
@@ -365,7 +365,7 @@ export default function AcademicsPage() {
                 </div>
               ) : (
                 <div className="space-y-4 pt-2">
-                  <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 items-end h-48 border-b border-white/10 pb-2 px-2">
+                  <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 items-end h-48 border-b border-slate-100 pb-2 px-2">
                     {semesters.map((s) => {
                       const sgpaVal = s.sgpa ?? 0;
                       const heightPercent = Math.min(100, Math.max(10, (sgpaVal / 10) * 100));
@@ -376,22 +376,22 @@ export default function AcademicsPage() {
                           onClick={() => handleSelectSemester(s.id)}
                           className="flex flex-col items-center gap-1.5 h-full justify-end cursor-pointer group"
                         >
-                          <span className="text-[11px] font-bold text-white group-hover:text-primary-400 transition-colors">
+                          <span className="text-[11px] font-bold text-[#001D39] group-hover:text-[#0A4174] transition-colors">
                             {sgpaVal > 0 ? sgpaVal.toFixed(2) : '—'}
                           </span>
-                          <div className="w-full max-w-[36px] bg-white/10 rounded-t-lg overflow-hidden flex flex-col justify-end h-full">
+                          <div className="w-full max-w-[36px] bg-slate-100 rounded-t-lg overflow-hidden flex flex-col justify-end h-full">
                             <div
                               className={`w-full rounded-t-lg transition-all duration-500 ${
                                 isSelected
-                                  ? 'bg-primary-500 shadow-glow'
+                                  ? 'bg-[#0A4174] shadow-sm'
                                   : sgpaVal >= 8.5
-                                  ? 'bg-accent-400/80 group-hover:bg-accent-400'
-                                  : 'bg-primary-500/70 group-hover:bg-primary-500'
+                                  ? 'bg-[#4E8EA2] group-hover:bg-[#4E8EA2]/90'
+                                  : 'bg-[#49769F] group-hover:bg-[#0A4174]'
                               }`}
                               style={{ height: `${heightPercent}%` }}
                             />
                           </div>
-                          <span className={`text-[11px] font-medium mt-1 ${isSelected ? 'text-primary-400 font-bold' : 'text-slate-400'}`}>
+                          <span className={`text-[11px] font-medium mt-1 ${isSelected ? 'text-[#0A4174] font-bold' : 'text-slate-500'}`}>
                             Sem {s.semesterNumber}
                           </span>
                         </div>
@@ -424,12 +424,12 @@ export default function AcademicsPage() {
                       key={i}
                       className={`p-3 rounded-xl border text-xs leading-relaxed ${
                         ins.type === 'DANGER'
-                          ? 'bg-danger-500/10 border-danger-500/20 text-danger-200'
+                          ? 'bg-rose-50 border-rose-200 text-rose-800'
                           : ins.type === 'WARNING'
-                          ? 'bg-warning-500/10 border-warning-500/20 text-warning-200'
+                          ? 'bg-amber-50 border-amber-200 text-amber-800'
                           : ins.type === 'SUCCESS'
-                          ? 'bg-accent-500/10 border-accent-500/20 text-accent-200'
-                          : 'bg-white/5 border-white/5 text-slate-300'
+                          ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                          : 'bg-[#F4F7FB] border-[#BDD8E9]/60 text-slate-700'
                       }`}
                     >
                       <div className="flex items-start gap-2">
@@ -442,7 +442,7 @@ export default function AcademicsPage() {
                   ))}
                 </div>
               ) : (
-                <p className="text-xs text-slate-400 text-center py-4">
+                <p className="text-xs text-slate-500 text-center py-4">
                   Add more academic records to receive AI-powered eligibility advice.
                 </p>
               )}
@@ -483,7 +483,7 @@ export default function AcademicsPage() {
           ) : (
             <div>
               {/* Semester Switcher Tabs */}
-              <div className="flex items-center gap-2 overflow-x-auto pb-3 border-b border-white/10 mb-4 scrollbar-none">
+              <div className="flex items-center gap-2 overflow-x-auto pb-3 border-b border-slate-100 mb-4 scrollbar-none">
                 {semesters.map((sem) => {
                   const isSelected = sem.id === selectedSemId;
                   return (
@@ -492,13 +492,13 @@ export default function AcademicsPage() {
                       onClick={() => handleSelectSemester(sem.id)}
                       className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 ${
                         isSelected
-                          ? 'bg-primary-500 text-white shadow-glow'
-                          : 'bg-surface-900/80 text-slate-400 hover:text-white hover:bg-white/10 border border-white/5'
+                          ? 'bg-[#0A4174] text-white shadow-sm'
+                          : 'bg-white border border-[#BDD8E9]/70 text-slate-600 hover:text-[#001D39] hover:bg-slate-50'
                       }`}
                     >
                       <span>Semester {sem.semesterNumber}</span>
                       {sem.sgpa != null && (
-                        <span className={`px-1.5 py-0.2 rounded-md text-[10px] ${isSelected ? 'bg-black/20 text-white' : 'bg-white/10 text-slate-300'}`}>
+                        <span className={`px-1.5 py-0.2 rounded-md text-[10px] ${isSelected ? 'bg-black/20 text-white' : 'bg-[#BDD8E9]/40 text-[#0A4174] font-semibold'}`}>
                           {sem.sgpa.toFixed(2)}
                         </span>
                       )}
@@ -509,13 +509,13 @@ export default function AcademicsPage() {
 
               {/* Selected Semester Details Header */}
               {selectedSemDetails && (
-                <div className="flex items-center justify-between p-3 rounded-xl bg-white/5 border border-white/5 mb-4 text-xs flex-wrap gap-2">
-                  <div className="flex items-center gap-4 text-slate-300">
-                    <span>Year: <strong className="text-white">{selectedSemDetails.academicYear}</strong></span>
-                    <span>Total Credits: <strong className="text-white">{selectedSemDetails.totalCredits ?? 0}</strong></span>
-                    <span>Computed SGPA: <strong className="text-primary-400 font-bold">{selectedSemDetails.sgpa ? selectedSemDetails.sgpa.toFixed(2) : '—'}</strong></span>
+                <div className="flex items-center justify-between p-3 rounded-xl bg-[#F4F7FB] border border-[#BDD8E9]/60 mb-4 text-xs flex-wrap gap-2">
+                  <div className="flex items-center gap-4 text-slate-600">
+                    <span>Year: <strong className="text-[#001D39]">{selectedSemDetails.academicYear}</strong></span>
+                    <span>Total Credits: <strong className="text-[#001D39]">{selectedSemDetails.totalCredits ?? 0}</strong></span>
+                    <span>Computed SGPA: <strong className="text-[#0A4174] font-bold">{selectedSemDetails.sgpa ? selectedSemDetails.sgpa.toFixed(2) : '—'}</strong></span>
                   </div>
-                  <span className="text-slate-400">
+                  <span className="text-slate-500">
                     {selectedSemDetails.subjectRecords?.length || 0} subjects registered
                   </span>
                 </div>
@@ -535,7 +535,7 @@ export default function AcademicsPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs border-collapse">
                     <thead>
-                      <tr className="border-b border-white/10 text-slate-400">
+                      <tr className="border-b border-slate-200 text-slate-500 bg-[#F4F7FB]/50">
                         <th className="py-2.5 px-3 font-semibold">Code</th>
                         <th className="py-2.5 px-3 font-semibold">Subject Title</th>
                         <th className="py-2.5 px-3 font-semibold text-center">Credits</th>
@@ -546,19 +546,19 @@ export default function AcademicsPage() {
                         <th className="py-2.5 px-3 font-semibold text-right">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/5">
+                    <tbody className="divide-y divide-slate-100">
                       {selectedSemDetails.subjectRecords.map((rec) => (
-                        <tr key={rec.id} className="hover:bg-white/5 transition-colors">
-                          <td className="py-3 px-3 font-mono font-medium text-primary-300">
+                        <tr key={rec.id} className="hover:bg-slate-50 transition-colors">
+                          <td className="py-3 px-3 font-mono font-medium text-[#0A4174]">
                             {rec.subject.code}
                           </td>
-                          <td className="py-3 px-3 font-medium text-white max-w-xs truncate">
+                          <td className="py-3 px-3 font-medium text-[#001D39] max-w-xs truncate">
                             {rec.subject.name}
                           </td>
-                          <td className="py-3 px-3 text-center text-slate-300">
+                          <td className="py-3 px-3 text-center text-slate-700">
                             {rec.subject.credits}
                           </td>
-                          <td className="py-3 px-3 text-center text-slate-300 font-mono">
+                          <td className="py-3 px-3 text-center text-slate-700 font-mono">
                             {rec.marksObtained != null ? `${rec.marksObtained} / ${rec.maxMarks}` : '—'}
                           </td>
                           <td className="py-3 px-3 text-center">
@@ -579,7 +579,7 @@ export default function AcademicsPage() {
                           </td>
                           <td className="py-3 px-3 text-center">
                             {rec.attendance != null ? (
-                              <span className={`font-medium ${rec.attendance < 75 ? 'text-danger-400 font-bold' : 'text-slate-300'}`}>
+                              <span className={`font-medium ${rec.attendance < 75 ? 'text-rose-600 font-bold' : 'text-slate-700'}`}>
                                 {rec.attendance}%
                               </span>
                             ) : (
@@ -597,14 +597,14 @@ export default function AcademicsPage() {
                             <div className="flex items-center justify-end gap-2">
                               <button
                                 onClick={() => openEditRecord(rec)}
-                                className="text-slate-400 hover:text-primary-400 p-1 transition-colors"
+                                className="text-slate-400 hover:text-[#0A4174] p-1 transition-colors"
                                 title="Edit Record"
                               >
                                 ✏️
                               </button>
                               <button
                                 onClick={() => setDeletingRecord(rec)}
-                                className="text-slate-400 hover:text-danger-400 p-1 transition-colors"
+                                className="text-slate-400 hover:text-rose-600 p-1 transition-colors"
                                 title="Delete Record"
                               >
                                 🗑️
@@ -674,7 +674,7 @@ export default function AcademicsPage() {
             placeholder="e.g. 22"
           />
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
             <Button
               type="button"
               variant="outline"
@@ -746,7 +746,7 @@ export default function AcademicsPage() {
             hint="Mandatory 75% requirement for placement eligibility"
           />
 
-          <div className="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
+          <div className="flex items-center gap-3 p-3 bg-[#F4F7FB] rounded-xl border border-[#BDD8E9]/60">
             <input
               type="checkbox"
               id="backlogCheck"
@@ -754,12 +754,12 @@ export default function AcademicsPage() {
               onChange={(e) => setRecordForm({ ...recordForm, isBacklog: e.target.checked })}
               className="w-4 h-4 rounded text-danger-500 focus:ring-danger-500"
             />
-            <label htmlFor="backlogCheck" className="text-sm font-medium text-slate-300 cursor-pointer">
+            <label htmlFor="backlogCheck" className="text-sm font-medium text-slate-700 cursor-pointer">
               Mark as active backlog
             </label>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
             <Button
               type="button"
               variant="outline"
@@ -783,7 +783,7 @@ export default function AcademicsPage() {
         size="sm"
       >
         <div className="space-y-4">
-          <p className="text-sm text-slate-300">
+          <p className="text-sm text-slate-600">
             Are you sure you want to remove <strong>{deletingRecord?.subject?.name}</strong> from Semester records?
           </p>
           <div className="flex justify-end gap-3 pt-2">

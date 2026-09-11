@@ -278,15 +278,15 @@ export default function ProfilePage() {
       )}
 
       {/* Top Profile Banner */}
-      <div className="glass p-6 bg-gradient-card border border-white/10 rounded-2xl">
+      <div className="p-6 bg-white border border-[#BDD8E9]/70 rounded-2xl shadow-card">
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6">
           <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-brand flex items-center justify-center text-white text-2xl font-bold shadow-glow border-2 border-white/20">
+            <div className="w-20 h-20 rounded-2xl bg-[#0A4174] flex items-center justify-center text-white text-2xl font-bold shadow-md border-2 border-white">
               {u.name ? u.name[0].toUpperCase() : 'S'}
             </div>
             <div>
               <div className="flex items-center gap-3 justify-center sm:justify-start flex-wrap">
-                <h2 className="font-display font-bold text-2xl text-white">{u.name}</h2>
+                <h2 className="font-display font-bold text-2xl text-[#001D39]">{u.name}</h2>
                 <Badge variant="primary" size="sm">STUDENT</Badge>
                 {p.rollNumber && (
                   <Badge variant="slate" size="sm">
@@ -294,31 +294,31 @@ export default function ProfilePage() {
                   </Badge>
                 )}
               </div>
-              <p className="text-slate-400 text-sm mt-1">{u.email}</p>
-              <div className="flex items-center gap-3 mt-2 text-xs text-slate-300 justify-center sm:justify-start flex-wrap">
+              <p className="text-slate-500 text-sm mt-1">{u.email}</p>
+              <div className="flex items-center gap-3 mt-2 text-xs text-slate-500 justify-center sm:justify-start flex-wrap">
                 {p.department && (
                   <span className="flex items-center gap-1">
-                    <span className="text-primary-400 font-semibold">{p.department.name}</span>
+                    <span className="text-[#0A4174] font-semibold">{p.department.name}</span>
                   </span>
                 )}
                 {p.batch && (
-                  <span className="text-slate-500">• Batch of {p.batch.year}</span>
+                  <span className="text-slate-400">• Batch of {p.batch.year}</span>
                 )}
                 {p.currentSemester && (
-                  <span className="text-slate-500">• Semester {p.currentSemester}</span>
+                  <span className="text-slate-400">• Semester {p.currentSemester}</span>
                 )}
               </div>
             </div>
           </div>
 
           {/* Completeness Ring & Action */}
-          <div className="flex items-center gap-4 bg-surface-900/60 p-4 rounded-xl border border-white/5">
+          <div className="flex items-center gap-4 bg-[#F4F7FB] p-4 rounded-xl border border-[#BDD8E9]/60">
             <CompletenessRing value={completeness} size={88} />
             <div className="text-left">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                 Profile Health
               </h4>
-              <p className="text-xs text-slate-300 mt-1 max-w-[140px]">
+              <p className="text-xs text-slate-600 mt-1 max-w-[140px]">
                 {completeness >= 80
                   ? 'Great job! Profile is placement ready.'
                   : 'Add details to increase visibility to recruiters.'}
@@ -349,7 +349,7 @@ export default function ProfilePage() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsEditProfileOpen(true)}
-                  className="text-primary-400 hover:text-primary-300 text-xs"
+                  className="text-[#0A4174] hover:text-[#001D39] text-xs"
                 >
                   Edit Details ✏️
                 </Button>
@@ -358,56 +358,56 @@ export default function ProfilePage() {
             <Card.Body>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 text-sm">
                 <div>
-                  <span className="text-slate-400 text-xs block">Full Name</span>
-                  <span className="text-white font-medium">{u.name || '—'}</span>
+                  <span className="text-slate-500 text-xs block">Full Name</span>
+                  <span className="text-[#001D39] font-medium">{u.name || '—'}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-xs block">Official Email</span>
-                  <span className="text-white font-medium">{u.email || '—'}</span>
+                  <span className="text-slate-500 text-xs block">Official Email</span>
+                  <span className="text-[#001D39] font-medium">{u.email || '—'}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-xs block">Roll Number</span>
-                  <span className="text-white font-medium">{p.rollNumber || 'Not set'}</span>
+                  <span className="text-slate-500 text-xs block">Roll Number</span>
+                  <span className="text-[#001D39] font-medium">{p.rollNumber || 'Not set'}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-xs block">Contact Phone</span>
-                  <span className="text-white font-medium">{p.phone || 'Not set'}</span>
+                  <span className="text-slate-500 text-xs block">Contact Phone</span>
+                  <span className="text-[#001D39] font-medium">{p.phone || 'Not set'}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-xs block">Department</span>
-                  <span className="text-white font-medium">{p.department?.name || 'Not assigned'}</span>
+                  <span className="text-slate-500 text-xs block">Department</span>
+                  <span className="text-[#001D39] font-medium">{p.department?.name || 'Not assigned'}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-xs block">Graduation Batch</span>
-                  <span className="text-white font-medium">
+                  <span className="text-slate-500 text-xs block">Graduation Batch</span>
+                  <span className="text-[#001D39] font-medium">
                     {p.batch ? `Class of ${p.batch.year}` : 'Not assigned'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-xs block">Current Semester</span>
-                  <span className="text-white font-medium">
+                  <span className="text-slate-500 text-xs block">Current Semester</span>
+                  <span className="text-[#001D39] font-medium">
                     {p.currentSemester ? `Semester ${p.currentSemester}` : 'Not set'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-xs block">Admission Year</span>
-                  <span className="text-white font-medium">{p.admissionYear || 'Not set'}</span>
+                  <span className="text-slate-500 text-xs block">Admission Year</span>
+                  <span className="text-[#001D39] font-medium">{p.admissionYear || 'Not set'}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-xs block">Gender</span>
-                  <span className="text-white font-medium">
+                  <span className="text-slate-500 text-xs block">Gender</span>
+                  <span className="text-[#001D39] font-medium">
                     {p.gender ? p.gender.replace('_', ' ') : 'Not set'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-xs block">Date of Birth</span>
-                  <span className="text-white font-medium">
+                  <span className="text-slate-500 text-xs block">Date of Birth</span>
+                  <span className="text-[#001D39] font-medium">
                     {p.dateOfBirth ? new Date(p.dateOfBirth).toLocaleDateString() : 'Not set'}
                   </span>
                 </div>
                 <div className="sm:col-span-2">
-                  <span className="text-slate-400 text-xs block">Address</span>
-                  <span className="text-white font-medium">{p.address || 'Not provided'}</span>
+                  <span className="text-slate-500 text-xs block">Address</span>
+                  <span className="text-[#001D39] font-medium">{p.address || 'Not provided'}</span>
                 </div>
               </div>
             </Card.Body>
@@ -425,7 +425,7 @@ export default function ProfilePage() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsEditCareerOpen(true)}
-                  className="text-primary-400 hover:text-primary-300 text-xs"
+                  className="text-[#0A4174] hover:text-[#001D39] text-xs"
                 >
                   Edit Preferences ✏️
                 </Button>
@@ -434,17 +434,17 @@ export default function ProfilePage() {
             <Card.Body>
               <div className="space-y-4 text-sm">
                 <div>
-                  <span className="text-slate-400 text-xs block">Target Job Role</span>
-                  <span className="text-white font-medium text-base">
+                  <span className="text-slate-500 text-xs block">Target Job Role</span>
+                  <span className="text-[#001D39] font-medium text-base">
                     {careerPref?.targetRole || 'Not specified yet'}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-xs block mb-1">Career Interests</span>
+                  <span className="text-slate-500 text-xs block mb-1">Career Interests</span>
                   {careerPref?.careerInterests && careerPref.careerInterests.length > 0 ? (
                     <div className="flex flex-wrap gap-1.5">
                       {careerPref.careerInterests.map((interest, i) => (
-                        <Badge key={i} variant="purple" size="sm">
+                        <Badge key={i} variant="teal" size="sm">
                           {interest}
                         </Badge>
                       ))}
@@ -455,14 +455,14 @@ export default function ProfilePage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <span className="text-slate-400 text-xs block">Preferred Job Location</span>
-                    <span className="text-white font-medium">
+                    <span className="text-slate-500 text-xs block">Preferred Job Location</span>
+                    <span className="text-[#001D39] font-medium">
                       {careerPref?.preferredLocation || 'Any / Remote'}
                     </span>
                   </div>
                   <div>
-                    <span className="text-slate-400 text-xs block">Career Goals & Aspirations</span>
-                    <p className="text-slate-300 text-xs mt-0.5">
+                    <span className="text-slate-500 text-xs block">Career Goals & Aspirations</span>
+                    <p className="text-slate-600 text-xs mt-0.5">
                       {careerPref?.careerGoals || 'Not specified'}
                     </p>
                   </div>
@@ -482,33 +482,33 @@ export default function ProfilePage() {
             </Card.Header>
             <Card.Body>
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 rounded-xl bg-white/5 border border-white/5 text-center">
-                  <span className="text-xs text-slate-400 block">Cumulative GPA</span>
-                  <span className="text-2xl font-bold text-accent-400 mt-1 block">
+                <div className="p-3 rounded-xl bg-[#F4F7FB] border border-[#BDD8E9]/60 text-center">
+                  <span className="text-xs text-slate-500 block">Cumulative GPA</span>
+                  <span className="text-2xl font-bold text-[#0A4174] mt-1 block">
                     {p.cgpa != null ? p.cgpa.toFixed(2) : '—'}
                   </span>
-                  <span className="text-[10px] text-slate-500">Scale of 10.0</span>
+                  <span className="text-[10px] text-slate-400">Scale of 10.0</span>
                 </div>
-                <div className="p-3 rounded-xl bg-white/5 border border-white/5 text-center">
-                  <span className="text-xs text-slate-400 block">Latest SGPA</span>
-                  <span className="text-2xl font-bold text-primary-400 mt-1 block">
+                <div className="p-3 rounded-xl bg-[#F4F7FB] border border-[#BDD8E9]/60 text-center">
+                  <span className="text-xs text-slate-500 block">Latest SGPA</span>
+                  <span className="text-2xl font-bold text-[#0A4174] mt-1 block">
                     {p.latestSgpa != null ? p.latestSgpa.toFixed(2) : '—'}
                   </span>
-                  <span className="text-[10px] text-slate-500">Last semester</span>
+                  <span className="text-[10px] text-slate-400">Last semester</span>
                 </div>
-                <div className="p-3 rounded-xl bg-white/5 border border-white/5 text-center">
-                  <span className="text-xs text-slate-400 block">Active Backlogs</span>
-                  <span className={`text-2xl font-bold mt-1 block ${p.activeBacklogs > 0 ? 'text-danger-400' : 'text-accent-400'}`}>
+                <div className="p-3 rounded-xl bg-[#F4F7FB] border border-[#BDD8E9]/60 text-center">
+                  <span className="text-xs text-slate-500 block">Active Backlogs</span>
+                  <span className={`text-2xl font-bold mt-1 block ${p.activeBacklogs > 0 ? 'text-rose-600' : 'text-emerald-600'}`}>
                     {p.activeBacklogs ?? 0}
                   </span>
-                  <span className="text-[10px] text-slate-500">Currently pending</span>
+                  <span className="text-[10px] text-slate-400">Currently pending</span>
                 </div>
-                <div className="p-3 rounded-xl bg-white/5 border border-white/5 text-center">
-                  <span className="text-xs text-slate-400 block">Total History</span>
-                  <span className="text-2xl font-bold text-slate-300 mt-1 block">
+                <div className="p-3 rounded-xl bg-[#F4F7FB] border border-[#BDD8E9]/60 text-center">
+                  <span className="text-xs text-slate-500 block">Total History</span>
+                  <span className="text-2xl font-bold text-[#001D39] mt-1 block">
                     {p.totalBacklogs ?? 0}
                   </span>
-                  <span className="text-[10px] text-slate-500">Lifetime backlogs</span>
+                  <span className="text-[10px] text-slate-400">Lifetime backlogs</span>
                 </div>
               </div>
             </Card.Body>
@@ -523,7 +523,7 @@ export default function ProfilePage() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setIsEditLinksOpen(true)}
-                  className="text-primary-400 hover:text-primary-300 text-xs"
+                  className="text-[#0A4174] hover:text-[#001D39] text-xs"
                 >
                   Manage 🔗
                 </Button>
@@ -552,15 +552,15 @@ export default function ProfilePage() {
                         href={link.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-between p-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 transition-all text-xs group"
+                        className="flex items-center justify-between p-2.5 rounded-xl bg-[#F4F7FB] hover:bg-[#BDD8E9]/25 border border-[#BDD8E9]/50 transition-all text-xs group"
                       >
                         <div className="flex items-center gap-2">
                           <span>{platformMeta?.icon || '🔗'}</span>
-                          <span className="text-white font-medium">
+                          <span className="text-[#001D39] font-medium">
                             {platformMeta?.label || link.platform}
                           </span>
                         </div>
-                        <span className="text-slate-400 group-hover:text-primary-400 flex items-center gap-1">
+                        <span className="text-[#0A4174] flex items-center gap-1 font-semibold">
                           Open ↗
                         </span>
                       </a>
@@ -660,7 +660,7 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
             <Button
               type="button"
               variant="outline"
@@ -684,7 +684,7 @@ export default function ProfilePage() {
         size="md"
       >
         <form onSubmit={handleLinksSubmit} className="space-y-3 max-h-[70vh] overflow-y-auto pr-1">
-          <p className="text-xs text-slate-400 mb-2">
+          <p className="text-xs text-slate-500 mb-2">
             Add links to your developer and professional profiles. LinkedIn or GitHub adds to your completeness score!
           </p>
           {PLATFORMS.map((platform) => (
@@ -702,7 +702,7 @@ export default function ProfilePage() {
             </div>
           ))}
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
             <Button
               type="button"
               variant="outline"
@@ -749,9 +749,9 @@ export default function ProfilePage() {
             placeholder="e.g. Bangalore, Hyderabad, Remote"
           />
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-slate-300">Career Goals & Aspirations</label>
+            <label className="text-sm font-medium text-slate-700">Career Goals & Aspirations</label>
             <textarea
-              className="w-full rounded-xl bg-white/5 border border-white/10 text-sm text-white placeholder-slate-500 p-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+              className="w-full rounded-xl bg-white border border-slate-300 text-sm text-[#001D39] placeholder-slate-400 p-3 focus:outline-none focus:ring-2 focus:ring-[#0A4174]"
               rows={3}
               value={careerForm.careerGoals}
               onChange={(e) => setCareerForm({ ...careerForm, careerGoals: e.target.value })}
@@ -759,7 +759,7 @@ export default function ProfilePage() {
             />
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
             <Button
               type="button"
               variant="outline"

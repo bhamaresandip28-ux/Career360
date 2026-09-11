@@ -159,14 +159,14 @@ export default function AchievementsPage() {
       )}
 
       {/* Header Banner */}
-      <div className="glass p-6 bg-gradient-card border border-white/10 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="p-6 bg-white border border-[#BDD8E9]/70 rounded-2xl shadow-card flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h2 className="font-display font-bold text-2xl text-white">Honors & Achievements</h2>
-          <p className="text-slate-400 text-sm mt-1 max-w-xl">
+          <h2 className="font-display font-bold text-2xl text-[#001D39]">Honors & Achievements</h2>
+          <p className="text-slate-600 text-sm mt-1 max-w-xl">
             National hackathons, competitive coding ranks, publications, leadership roles, and extracurricular distinctions.
           </p>
-          <div className="flex items-center gap-4 mt-3 text-xs text-slate-300">
-            <span>Total Accolades: <strong className="text-white">{achievements.length}</strong></span>
+          <div className="flex items-center gap-4 mt-3 text-xs text-slate-500">
+            <span>Total Accolades: <strong className="text-[#001D39]">{achievements.length}</strong></span>
           </div>
         </div>
         <Button variant="primary" onClick={openAddModal} className="flex-shrink-0">
@@ -185,14 +185,14 @@ export default function AchievementsPage() {
               onClick={() => setActiveCategory(cat.value)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all flex items-center gap-1.5 ${
                 isActive
-                  ? 'bg-primary-500 text-white shadow-glow'
-                  : 'bg-surface-900/80 text-slate-400 hover:text-white hover:bg-white/10 border border-white/5'
+                  ? 'bg-[#0A4174] text-white shadow-sm'
+                  : 'bg-white border border-[#BDD8E9]/70 text-slate-600 hover:text-[#001D39] hover:bg-slate-50'
               }`}
             >
               {cat.icon && <span>{cat.icon}</span>}
               <span>{cat.label}</span>
               {count > 0 && (
-                <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${isActive ? 'bg-black/20 text-white' : 'bg-white/10 text-slate-300'}`}>
+                <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${isActive ? 'bg-black/20 text-white' : 'bg-[#BDD8E9]/40 text-[#0A4174] font-semibold'}`}>
                   {count}
                 </span>
               )}
@@ -222,12 +222,12 @@ export default function AchievementsPage() {
             return (
               <div
                 key={item.id}
-                className="glass p-6 rounded-2xl border border-white/10 hover:border-warning-500/30 transition-all flex flex-col justify-between"
+                className="p-6 bg-white rounded-2xl border border-[#BDD8E9]/70 shadow-card hover:border-[#0A4174]/40 transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <h3 className="font-semibold text-white text-base leading-snug">
+                      <h3 className="font-semibold text-[#001D39] text-base leading-snug">
                         {item.title}
                       </h3>
                       <div className="flex items-center gap-2 mt-1">
@@ -238,42 +238,42 @@ export default function AchievementsPage() {
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-400 mt-2 font-medium">
+                  <p className="text-xs text-slate-500 mt-2 font-medium">
                     {new Date(item.date).toLocaleDateString(undefined, { month: 'long', year: 'numeric' })}
                   </p>
 
                   {item.description && (
-                    <p className="text-sm text-slate-300 mt-3 line-clamp-3 leading-relaxed">
+                    <p className="text-sm text-slate-600 mt-3 line-clamp-3 leading-relaxed">
                       {item.description}
                     </p>
                   )}
                 </div>
 
                 {/* Footer */}
-                <div className="flex items-center justify-between mt-5 pt-4 border-t border-white/5">
+                <div className="flex items-center justify-between mt-5 pt-4 border-t border-slate-100">
                   {item.proofUrl ? (
                     <a
                       href={item.proofUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-xs text-accent-400 hover:text-accent-300 font-medium flex items-center gap-1"
+                      className="text-xs text-[#0A4174] hover:text-[#001D39] font-medium flex items-center gap-1"
                     >
                       <span>Certificate / Link ↗</span>
                     </a>
                   ) : (
-                    <span className="text-[11px] text-slate-500">Self-attested</span>
+                    <span className="text-[11px] text-slate-400">Self-attested</span>
                   )}
 
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => openEditModal(item)}
-                      className="text-xs text-slate-400 hover:text-primary-400 p-1.5 transition-colors"
+                      className="text-xs text-slate-500 hover:text-[#0A4174] p-1.5 transition-colors"
                     >
                       Edit ✏️
                     </button>
                     <button
                       onClick={() => setDeletingItem(item)}
-                      className="text-xs text-slate-400 hover:text-danger-400 p-1.5 transition-colors"
+                      className="text-xs text-slate-500 hover:text-rose-600 p-1.5 transition-colors"
                     >
                       Delete 🗑️
                     </button>
@@ -294,8 +294,8 @@ export default function AchievementsPage() {
       >
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
-            label="Achievement / Distinction Title"
-            id="achieveTitle"
+            label="Achievement / Honor Title"
+            id="achTitle"
             required
             value={form.title}
             onChange={(e) => setForm({ ...form, title: e.target.value })}
@@ -305,14 +305,14 @@ export default function AchievementsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Select
               label="Category"
-              id="achieveCat"
-              options={CATEGORIES.filter(c => c.value !== 'ALL')}
+              id="achCategory"
+              options={CATEGORIES.filter((c) => c.value !== 'ALL')}
               value={form.category}
               onChange={(e) => setForm({ ...form, category: e.target.value })}
             />
             <Input
-              label="Date"
-              id="achieveDate"
+              label="Date Awarded"
+              id="achDate"
               type="date"
               required
               value={form.date}
@@ -321,9 +321,9 @@ export default function AchievementsPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-slate-300">Description</label>
+            <label className="text-sm font-medium text-slate-700">Description & Impact</label>
             <textarea
-              className="w-full rounded-xl bg-white/5 border border-white/10 text-sm text-white placeholder-slate-500 p-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+              className="w-full rounded-xl bg-white border border-slate-300 text-sm text-[#001D39] placeholder-slate-400 p-3 focus:outline-none focus:ring-2 focus:ring-[#0A4174]"
               rows={3}
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
@@ -340,7 +340,7 @@ export default function AchievementsPage() {
             placeholder="https://..."
           />
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
             <Button
               type="button"
               variant="outline"
@@ -364,7 +364,7 @@ export default function AchievementsPage() {
         size="sm"
       >
         <div className="space-y-4">
-          <p className="text-sm text-slate-300">
+          <p className="text-sm text-slate-600">
             Are you sure you want to delete <strong>{deletingItem?.title}</strong>?
           </p>
           <div className="flex justify-end gap-3 pt-2">

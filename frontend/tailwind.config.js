@@ -13,54 +13,75 @@ export default {
         mono:    ['JetBrains Mono', 'ui-monospace'],
       },
       colors: {
-        // Brand palette
+        // Career360 Official Color Palette
+        brand: {
+          navy:      '#001D39', // Primary Dark (Sidebar, Main Headings, Strong Text, Major Dark Sections)
+          primary:   '#0A4174', // Primary Interaction (Buttons, Links, Active Nav, Main CTAs)
+          slate:     '#49769F', // Secondary Blue (Secondary Buttons, Supporting Cards/Charts)
+          teal:      '#4E8EA2', // Teal Blue (Skills, Analytics, Data Viz, Secondary Indicators)
+          mutedTeal: '#6EA2B3', // Muted Teal (Subtle Indicators, Progress Elements)
+          sky:       '#7BBDE8', // Sky Blue (Highlights, Hover States, Progress Indicators)
+          lightBlue: '#BDD8E9', // Light Blue (Soft BG, Selected States, Light Sections)
+          white:     '#FFFFFF', // White (Main Content, Cards, Forms, Tables, Clean Surfaces)
+        },
+        // Integrated primary scale for Career360
         primary: {
-          50:  '#eef2ff',
-          100: '#e0e7ff',
-          200: '#c7d2fe',
-          300: '#a5b4fc',
-          400: '#818cf8',
-          500: '#6366f1',
-          600: '#4f46e5',
-          700: '#4338ca',
-          800: '#3730a3',
-          900: '#312e81',
-          950: '#1e1b4b',
+          50:  '#F0F6FA',
+          100: '#E1EFF8',
+          200: '#BDD8E9', // Light Blue
+          300: '#7BBDE8', // Sky Blue
+          400: '#6EA2B3', // Muted Teal
+          500: '#4E8EA2', // Teal Blue
+          600: '#0A4174', // Primary Blue (Interaction)
+          700: '#083660',
+          800: '#052749',
+          900: '#001D39', // Dark Navy
+          950: '#001224',
         },
         surface: {
-          50:  '#f8fafc',
-          100: '#f1f5f9',
-          200: '#e2e8f0',
-          300: '#cbd5e1',
-          800: '#1e293b',
-          900: '#0f172a',
-          950: '#020617',
+          50:  '#FFFFFF',
+          100: '#F8FAFC',
+          200: '#F1F5F9',
+          300: '#E2E8F0',
+          400: '#BDD8E9', // Light Blue accent
+          500: '#6EA2B3', // Muted Teal
+          600: '#4E8EA2', // Teal
+          700: '#49769F', // Slate Blue
+          800: '#0A4174', // Primary Blue
+          900: '#001D39', // Dark Navy (Sidebar & Dark brand sections)
+          950: '#F4F7FB', // Light clean page background
         },
+        // Semantic status colors
         accent: {
-          400: '#34d399',
-          500: '#10b981',
+          400: '#34D399',
+          500: '#10B981',
           600: '#059669',
         },
         warning: {
-          400: '#fbbf24',
-          500: '#f59e0b',
+          400: '#FBBF24',
+          500: '#F59E0B',
         },
         danger: {
-          400: '#f87171',
-          500: '#ef4444',
-          600: '#dc2626',
+          400: '#F87171',
+          500: '#EF4444',
+          600: '#DC2626',
         },
       },
       backgroundImage: {
-        'gradient-brand': 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%)',
-        'gradient-dark':  'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
-        'gradient-card':  'linear-gradient(135deg, rgba(99,102,241,0.15) 0%, rgba(168,85,247,0.15) 100%)',
+        'gradient-brand':   'linear-gradient(135deg, #001D39 0%, #0A4174 100%)',
+        'gradient-subtle':  'linear-gradient(135deg, #0A4174 0%, #49769F 100%)',
+        'gradient-light':   'linear-gradient(135deg, #FFFFFF 0%, #F0F6FA 100%)',
+        'gradient-card':    'linear-gradient(135deg, rgba(10,65,116,0.04) 0%, rgba(189,216,233,0.12) 100%)',
+        'gradient-navy':    'linear-gradient(135deg, #001D39 0%, #083660 100%)',
       },
       boxShadow: {
-        glow:    '0 0 20px rgba(99, 102, 241, 0.3)',
-        'glow-lg': '0 0 40px rgba(99, 102, 241, 0.4)',
-        card:    '0 4px 24px rgba(0,0,0,0.12)',
-        'card-hover': '0 8px 32px rgba(0,0,0,0.2)',
+        sm:          '0 1px 3px 0 rgba(0, 29, 57, 0.06)',
+        md:          '0 4px 6px -1px rgba(0, 29, 57, 0.08), 0 2px 4px -2px rgba(0, 29, 57, 0.04)',
+        lg:          '0 10px 15px -3px rgba(0, 29, 57, 0.1), 0 4px 6px -4px rgba(0, 29, 57, 0.05)',
+        glow:        '0 0 20px rgba(10, 65, 116, 0.25)',
+        'glow-lg':   '0 0 40px rgba(10, 65, 116, 0.35)',
+        card:        '0 2px 12px rgba(0, 29, 57, 0.06)',
+        'card-hover':'0 8px 24px rgba(0, 29, 57, 0.12)',
       },
       animation: {
         'fade-in':    'fadeIn 0.5s ease-out',

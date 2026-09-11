@@ -19,6 +19,8 @@ export const setTargetRole = async (targetRoleId) => {
   return res.data?.data;
 };
 
+export const setMyTargetRole = setTargetRole;
+
 export const getReadiness = async (targetRoleId = null) => {
   const params = targetRoleId ? { targetRoleId } : {};
   const res = await api.get('/career/readiness', { params });

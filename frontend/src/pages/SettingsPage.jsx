@@ -70,31 +70,31 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6 max-w-4xl mx-auto pb-12">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-surface-900 to-surface-850 p-6 rounded-2xl border border-white/10 shadow-xl">
-        <h1 className="text-2xl font-bold text-white tracking-tight flex items-center gap-2">
-          <Shield className="w-6 h-6 text-primary-400" />
+      <div className="p-6 bg-white border border-[#BDD8E9]/70 rounded-2xl shadow-card">
+        <h1 className="text-2xl font-bold text-[#001D39] tracking-tight flex items-center gap-2">
+          <Shield className="w-6 h-6 text-[#0A4174]" />
           Account & Security Settings
         </h1>
-        <p className="text-slate-400 text-sm mt-1">
+        <p className="text-slate-600 text-sm mt-1">
           Manage your security credentials, notification preferences, and account privacy.
         </p>
       </div>
 
       {/* Account Overview Card */}
       <Card className="p-6">
-        <h2 className="text-base font-bold text-white mb-4 flex items-center gap-2">
-          <User className="w-4 h-4 text-primary-400" />
+        <h2 className="text-base font-bold text-[#001D39] mb-4 flex items-center gap-2">
+          <User className="w-4 h-4 text-[#0A4174]" />
           Account Identity
         </h2>
 
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-surface-800/80 border border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-[#F4F7FB] border border-[#BDD8E9]/60">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-brand flex items-center justify-center text-white text-base font-bold shadow-glow">
+            <div className="w-12 h-12 rounded-full bg-[#0A4174] flex items-center justify-center text-white text-base font-bold shadow-sm">
               {currentUser?.name?.[0]?.toUpperCase() || 'U'}
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-white">{currentUser?.name}</h3>
-              <p className="text-xs text-slate-400">{currentUser?.email}</p>
+              <h3 className="text-sm font-semibold text-[#001D39]">{currentUser?.name}</h3>
+              <p className="text-xs text-slate-500">{currentUser?.email}</p>
               <div className="flex items-center gap-2 mt-1">
                 <Badge variant="primary" size="sm">{currentUser?.role}</Badge>
                 <Badge variant="success" size="sm">ACTIVE</Badge>
@@ -106,19 +106,19 @@ export default function SettingsPage() {
 
       {/* Security: Password Change */}
       <Card className="p-6">
-        <h2 className="text-base font-bold text-white mb-1 flex items-center gap-2">
-          <Lock className="w-4 h-4 text-amber-400" />
+        <h2 className="text-base font-bold text-[#001D39] mb-1 flex items-center gap-2">
+          <Lock className="w-4 h-4 text-[#0A4174]" />
           Change Password
         </h2>
-        <p className="text-xs text-slate-400 mb-5">
+        <p className="text-xs text-slate-500 mb-5">
           Ensure your account is using a long, random password for maximum security.
         </p>
 
         {msg.text && (
           <div className={`p-3 rounded-xl text-xs mb-4 flex items-center gap-2 ${
             msg.type === 'success'
-              ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400'
-              : 'bg-rose-500/10 border border-rose-500/20 text-rose-400'
+              ? 'bg-emerald-50 border border-emerald-200 text-emerald-700'
+              : 'bg-rose-50 border border-rose-200 text-rose-700'
           }`}>
             {msg.type === 'success' ? <CheckCircle className="w-4 h-4 flex-shrink-0" /> : <AlertCircle className="w-4 h-4 flex-shrink-0" />}
             <span>{msg.text}</span>
@@ -127,7 +127,7 @@ export default function SettingsPage() {
 
         <form onSubmit={handlePasswordChange} className="space-y-4 max-w-lg">
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
               Current Password
             </label>
             <Input
@@ -140,7 +140,7 @@ export default function SettingsPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
               New Password
             </label>
             <Input
@@ -153,7 +153,7 @@ export default function SettingsPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
               Confirm New Password
             </label>
             <Input
@@ -180,11 +180,11 @@ export default function SettingsPage() {
 
       {/* Notification Preferences */}
       <Card className="p-6">
-        <h2 className="text-base font-bold text-white mb-1 flex items-center gap-2">
-          <Bell className="w-4 h-4 text-purple-400" />
+        <h2 className="text-base font-bold text-[#001D39] mb-1 flex items-center gap-2">
+          <Bell className="w-4 h-4 text-[#0A4174]" />
           Notification Channels
         </h2>
-        <p className="text-xs text-slate-400 mb-4">
+        <p className="text-xs text-slate-500 mb-4">
           Control which system events trigger in-app bell notifications.
         </p>
 
@@ -195,16 +195,16 @@ export default function SettingsPage() {
             { key: 'academics', label: 'Academic & Grade Records', desc: 'Updates to semester SGPA, grade sheets, or backlog warnings.' },
             { key: 'system', label: 'Security & System Alerts', desc: 'Important administrative notifications and security advisories.' },
           ].map((item) => (
-            <div key={item.key} className="flex items-center justify-between p-3 rounded-xl bg-surface-800/50 border border-white/5">
+            <div key={item.key} className="flex items-center justify-between p-3 rounded-xl bg-[#F4F7FB] border border-[#BDD8E9]/50">
               <div>
-                <p className="text-xs font-semibold text-slate-200">{item.label}</p>
-                <p className="text-[11px] text-slate-400">{item.desc}</p>
+                <p className="text-xs font-semibold text-[#001D39]">{item.label}</p>
+                <p className="text-[11px] text-slate-500">{item.desc}</p>
               </div>
               <input
                 type="checkbox"
                 checked={notificationPrefs[item.key]}
                 onChange={(e) => setNotificationPrefs({ ...notificationPrefs, [item.key]: e.target.checked })}
-                className="w-4 h-4 rounded text-primary-600 focus:ring-primary-500 bg-surface-700 border-white/10"
+                className="w-4 h-4 rounded text-[#0A4174] focus:ring-[#0A4174] border-slate-300"
               />
             </div>
           ))}

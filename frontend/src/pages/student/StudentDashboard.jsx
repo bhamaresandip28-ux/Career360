@@ -79,7 +79,7 @@ export default function StudentDashboard() {
   if (loading) {
     return (
       <div className="flex h-96 items-center justify-center">
-        <Loading size="lg" text="Loading student intelligence dashboard..." />
+        <Loading size="lg" label="Loading student intelligence dashboard..." />
       </div>
     );
   }
@@ -91,18 +91,18 @@ export default function StudentDashboard() {
   return (
     <div className="space-y-8 animate-fade-in pb-12 p-6 max-w-7xl mx-auto">
       {/* ─── Header ─────────────────────────────────────────────────── */}
-      <div className="border-b border-white/10 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="border-b border-slate-200 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-semibold uppercase tracking-wider text-primary-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#0A4174]">
               Student Career Intelligence
             </span>
             <Badge variant="primary" size="sm" dot>Active</Badge>
           </div>
-          <h1 className="text-2xl md:text-3xl font-display font-bold text-white tracking-tight">
+          <h1 className="text-2xl md:text-3xl font-display font-bold text-[#001D39] tracking-tight">
             Welcome, {currentUser?.name} — Your Career360 Dashboard
           </h1>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="text-slate-500 text-sm mt-1">
             {p?.department
               ? `${p.department.name} • ${p.batch ? `Class of ${p.batch.year}` : ''} • Semester ${p.currentSemester || '6'}`
               : 'Track your career journey, profile readiness, and explore previous year placement insights.'}
@@ -110,11 +110,11 @@ export default function StudentDashboard() {
         </div>
 
         {/* Profile Completeness Pill */}
-        <div className="bg-surface-900/80 px-4 py-2 rounded-xl border border-white/10 flex items-center gap-3">
+        <div className="bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
           <CompletenessRing value={stats.completeness || 85} size={48} />
           <div>
-            <div className="text-[11px] text-slate-400">Profile Readiness</div>
-            <div className="text-xs font-semibold text-white">
+            <div className="text-[11px] text-slate-500 font-medium">Profile Readiness</div>
+            <div className="text-xs font-bold text-[#001D39]">
               {stats.completeness || 85}% Complete
             </div>
           </div>
@@ -124,48 +124,48 @@ export default function StudentDashboard() {
       {/* ─── Two Primary Action Cards (Big Cards) ─────────────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Card 1: My Career Journey */}
-        <Card className="p-8 bg-gradient-to-br from-surface-900 via-surface-900/95 to-primary-950/30 border border-primary-500/30 hover:border-primary-500/60 shadow-xl transition-all flex flex-col justify-between group">
+        <Card className="p-8 bg-white border border-[#BDD8E9]/80 hover:border-[#0A4174]/40 shadow-sm hover:shadow-card-hover transition-all flex flex-col justify-between group">
           <div>
-            <div className="w-12 h-12 rounded-xl bg-primary-500/20 border border-primary-500/30 flex items-center justify-center text-2xl mb-4 group-hover:scale-105 transition-transform">
+            <div className="w-12 h-12 rounded-xl bg-[#E1EFF8] text-[#0A4174] flex items-center justify-center text-2xl mb-4 group-hover:scale-105 transition-transform">
               🧭
             </div>
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-bold font-display text-white">
+              <h2 className="text-xl font-bold font-display text-[#001D39]">
                 My Career Journey
               </h2>
               <Badge variant="primary" size="sm">Your Profile</Badge>
             </div>
-            <p className="text-slate-300 text-sm mt-2 leading-relaxed">
+            <p className="text-slate-700 text-sm mt-2 leading-relaxed font-medium">
               Track your academics, skills, projects and career readiness.
             </p>
-            <p className="text-xs text-slate-400 mt-2">
+            <p className="text-xs text-slate-500 mt-2 leading-relaxed">
               Maintain your portfolio, manage verified course grades, evaluate skill gaps against target roles, and follow personalized learning roadmaps.
             </p>
 
             <div className="flex flex-wrap gap-2 mt-5">
-              <Link to="/student/profile" className="text-xs px-2.5 py-1 rounded bg-surface-800 text-slate-300 border border-white/5 hover:border-white/20">
+              <Link to="/student/profile" className="text-xs px-2.5 py-1 rounded-lg bg-[#F8FAFC] text-[#0A4174] border border-slate-200 hover:border-[#0A4174] transition-colors font-medium">
                 👤 Profile Details
               </Link>
-              <Link to="/student/academics" className="text-xs px-2.5 py-1 rounded bg-surface-800 text-slate-300 border border-white/5 hover:border-white/20">
+              <Link to="/student/academics" className="text-xs px-2.5 py-1 rounded-lg bg-[#F8FAFC] text-[#0A4174] border border-slate-200 hover:border-[#0A4174] transition-colors font-medium">
                 🎓 Academics
               </Link>
-              <Link to="/student/skills" className="text-xs px-2.5 py-1 rounded bg-surface-800 text-slate-300 border border-white/5 hover:border-white/20">
+              <Link to="/student/skills" className="text-xs px-2.5 py-1 rounded-lg bg-[#F8FAFC] text-[#0A4174] border border-slate-200 hover:border-[#0A4174] transition-colors font-medium">
                 ⚡ Skills ({stats.skills.length})
               </Link>
-              <Link to="/student/projects" className="text-xs px-2.5 py-1 rounded bg-surface-800 text-slate-300 border border-white/5 hover:border-white/20">
+              <Link to="/student/projects" className="text-xs px-2.5 py-1 rounded-lg bg-[#F8FAFC] text-[#0A4174] border border-slate-200 hover:border-[#0A4174] transition-colors font-medium">
                 💻 Projects ({stats.projects.length})
               </Link>
-              <Link to="/student/career" className="text-xs px-2.5 py-1 rounded bg-surface-800 text-slate-300 border border-white/5 hover:border-white/20">
+              <Link to="/student/career" className="text-xs px-2.5 py-1 rounded-lg bg-[#F8FAFC] text-[#0A4174] border border-slate-200 hover:border-[#0A4174] transition-colors font-medium">
                 🎯 Career Intelligence
               </Link>
             </div>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-white/10">
+          <div className="mt-8 pt-4 border-t border-slate-100">
             <Button
               variant="primary"
               size="md"
-              className="w-full justify-center shadow-glow"
+              className="w-full justify-center shadow-sm"
               onClick={() => navigate('/student/profile')}
             >
               View My Career Journey →
@@ -174,47 +174,47 @@ export default function StudentDashboard() {
         </Card>
 
         {/* Card 2: Previous Year Placement Insights */}
-        <Card className="p-8 bg-gradient-to-br from-surface-900 via-surface-900/95 to-purple-950/30 border border-purple-500/30 hover:border-purple-500/60 shadow-xl transition-all flex flex-col justify-between group">
+        <Card className="p-8 bg-white border border-[#BDD8E9]/80 hover:border-[#0A4174]/40 shadow-sm hover:shadow-card-hover transition-all flex flex-col justify-between group">
           <div>
-            <div className="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-2xl mb-4 group-hover:scale-105 transition-transform">
+            <div className="w-12 h-12 rounded-xl bg-[#E1EFF8] text-[#0A4174] flex items-center justify-center text-2xl mb-4 group-hover:scale-105 transition-transform">
               📊
             </div>
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-bold font-display text-white">
+              <h2 className="text-xl font-bold font-display text-[#001D39]">
                 Previous Year Placement Insights
               </h2>
-              <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+              <span className="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
                 DEMO DATA
               </span>
             </div>
-            <p className="text-slate-300 text-sm mt-2 leading-relaxed">
+            <p className="text-slate-700 text-sm mt-2 leading-relaxed font-medium">
               Explore placement statistics, companies, packages and skills associated with previous placements.
             </p>
-            <p className="text-xs text-slate-400 mt-2">
+            <p className="text-xs text-slate-500 mt-2 leading-relaxed">
               Access real recruitment metrics across top tech firms (2023–2025 cohorts), inspect company CTC distributions, and benchmark your profile.
             </p>
 
             <div className="grid grid-cols-3 gap-2 mt-5 text-center">
-              <div className="p-2.5 bg-surface-800/60 rounded-lg border border-white/5">
-                <div className="text-xs text-slate-400">Peak Offer</div>
-                <div className="text-sm font-bold text-purple-300 font-mono mt-0.5">44 LPA</div>
+              <div className="p-2.5 bg-[#F8FAFC] rounded-xl border border-slate-200">
+                <div className="text-xs text-slate-500">Peak Offer</div>
+                <div className="text-sm font-bold text-[#001D39] font-mono mt-0.5">44 LPA</div>
               </div>
-              <div className="p-2.5 bg-surface-800/60 rounded-lg border border-white/5">
-                <div className="text-xs text-slate-400">Avg CTC</div>
-                <div className="text-sm font-bold text-cyan-300 font-mono mt-0.5">22.5 LPA</div>
+              <div className="p-2.5 bg-[#F8FAFC] rounded-xl border border-slate-200">
+                <div className="text-xs text-slate-500">Avg CTC</div>
+                <div className="text-sm font-bold text-[#0A4174] font-mono mt-0.5">22.5 LPA</div>
               </div>
-              <div className="p-2.5 bg-surface-800/60 rounded-lg border border-white/5">
-                <div className="text-xs text-slate-400">Companies</div>
-                <div className="text-sm font-bold text-emerald-300 font-mono mt-0.5">8+ Top Tier</div>
+              <div className="p-2.5 bg-[#F8FAFC] rounded-xl border border-slate-200">
+                <div className="text-xs text-slate-500">Companies</div>
+                <div className="text-sm font-bold text-emerald-700 font-mono mt-0.5">8+ Top Tier</div>
               </div>
             </div>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-white/10">
+          <div className="mt-8 pt-4 border-t border-slate-100">
             <Button
               variant="outline"
               size="md"
-              className="w-full justify-center border-purple-500/40 hover:bg-purple-500/10 text-purple-200"
+              className="w-full justify-center"
               onClick={() => navigate('/student/insights')}
             >
               Explore Placement Insights →
@@ -226,21 +226,21 @@ export default function StudentDashboard() {
       {/* ─── Compact Summary Below the Cards (Real Metrics) ─────────────────────────── */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-300">
-            Current Profile & Academic Standing Summary
+          <h3 className="text-sm font-bold uppercase tracking-wider text-[#001D39]">
+            Current Profile &amp; Academic Standing Summary
           </h3>
-          <span className="text-xs text-slate-400">Real-time Student Metrics</span>
+          <span className="text-xs text-slate-500">Real-time Student Metrics</span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {/* CGPA */}
           <Link to="/student/academics" className="group">
-            <Card className="p-4 bg-surface-900 border border-white/10 hover:border-primary-500/40 transition-all">
-              <span className="text-xs text-slate-400 block">CGPA</span>
-              <span className="text-2xl font-bold font-display text-white mt-1 block">
+            <Card className="p-4 bg-white border border-[#BDD8E9]/70 hover:border-[#0A4174]/40 shadow-sm hover:shadow-md transition-all">
+              <span className="text-xs text-slate-500 block">CGPA</span>
+              <span className="text-2xl font-bold font-display text-[#001D39] mt-1 block">
                 {typeof cgpaValue === 'number' ? cgpaValue.toFixed(2) : cgpaValue}
               </span>
-              <span className="text-[11px] text-primary-400 font-medium group-hover:underline">
+              <span className="text-[11px] text-[#0A4174] font-medium group-hover:underline">
                 View transcript →
               </span>
             </Card>
@@ -248,12 +248,12 @@ export default function StudentDashboard() {
 
           {/* Career Readiness Score */}
           <Link to="/student/career" className="group">
-            <Card className="p-4 bg-surface-900 border border-white/10 hover:border-emerald-500/40 transition-all">
-              <span className="text-xs text-slate-400 block">Readiness Score</span>
-              <span className="text-2xl font-bold font-display text-emerald-400 mt-1 block">
+            <Card className="p-4 bg-white border border-[#BDD8E9]/70 hover:border-[#0A4174]/40 shadow-sm hover:shadow-md transition-all">
+              <span className="text-xs text-slate-500 block">Readiness Score</span>
+              <span className="text-2xl font-bold font-display text-emerald-700 mt-1 block">
                 {readinessScore}%
               </span>
-              <span className="text-[11px] text-emerald-400 font-medium group-hover:underline">
+              <span className="text-[11px] text-emerald-700 font-medium group-hover:underline">
                 Target role ready →
               </span>
             </Card>
@@ -261,12 +261,12 @@ export default function StudentDashboard() {
 
           {/* Skills Count */}
           <Link to="/student/skills" className="group">
-            <Card className="p-4 bg-surface-900 border border-white/10 hover:border-cyan-500/40 transition-all">
-              <span className="text-xs text-slate-400 block">Skills Count</span>
-              <span className="text-2xl font-bold font-display text-cyan-300 mt-1 block">
+            <Card className="p-4 bg-white border border-[#BDD8E9]/70 hover:border-[#0A4174]/40 shadow-sm hover:shadow-md transition-all">
+              <span className="text-xs text-slate-500 block">Skills Count</span>
+              <span className="text-2xl font-bold font-display text-[#4E8EA2] mt-1 block">
                 {stats.skills.length}
               </span>
-              <span className="text-[11px] text-cyan-400 font-medium group-hover:underline">
+              <span className="text-[11px] text-[#4E8EA2] font-medium group-hover:underline">
                 Manage skills →
               </span>
             </Card>
@@ -274,12 +274,12 @@ export default function StudentDashboard() {
 
           {/* Projects Count */}
           <Link to="/student/projects" className="group">
-            <Card className="p-4 bg-surface-900 border border-white/10 hover:border-purple-500/40 transition-all">
-              <span className="text-xs text-slate-400 block">Projects Built</span>
-              <span className="text-2xl font-bold font-display text-purple-300 mt-1 block">
+            <Card className="p-4 bg-white border border-[#BDD8E9]/70 hover:border-[#0A4174]/40 shadow-sm hover:shadow-md transition-all">
+              <span className="text-xs text-slate-500 block">Projects Built</span>
+              <span className="text-2xl font-bold font-display text-[#49769F] mt-1 block">
                 {stats.projects.length}
               </span>
-              <span className="text-[11px] text-purple-400 font-medium group-hover:underline">
+              <span className="text-[11px] text-[#49769F] font-medium group-hover:underline">
                 View projects →
               </span>
             </Card>
@@ -287,12 +287,12 @@ export default function StudentDashboard() {
 
           {/* Certifications */}
           <Link to="/student/certifications" className="group">
-            <Card className="p-4 bg-surface-900 border border-white/10 hover:border-amber-500/40 transition-all">
-              <span className="text-xs text-slate-400 block">Certifications</span>
-              <span className="text-2xl font-bold font-display text-amber-300 mt-1 block">
+            <Card className="p-4 bg-white border border-[#BDD8E9]/70 hover:border-[#0A4174]/40 shadow-sm hover:shadow-md transition-all">
+              <span className="text-xs text-slate-500 block">Certifications</span>
+              <span className="text-2xl font-bold font-display text-[#0A4174] mt-1 block">
                 {stats.certifications.length}
               </span>
-              <span className="text-[11px] text-amber-400 font-medium group-hover:underline">
+              <span className="text-[11px] text-[#0A4174] font-medium group-hover:underline">
                 View credentials →
               </span>
             </Card>
@@ -300,12 +300,12 @@ export default function StudentDashboard() {
 
           {/* Internships */}
           <Link to="/student/internships" className="group">
-            <Card className="p-4 bg-surface-900 border border-white/10 hover:border-blue-500/40 transition-all">
-              <span className="text-xs text-slate-400 block">Internships</span>
-              <span className="text-2xl font-bold font-display text-blue-300 mt-1 block">
+            <Card className="p-4 bg-white border border-[#BDD8E9]/70 hover:border-[#0A4174]/40 shadow-sm hover:shadow-md transition-all">
+              <span className="text-xs text-slate-500 block">Internships</span>
+              <span className="text-2xl font-bold font-display text-[#001D39] mt-1 block">
                 {stats.internships.length}
               </span>
-              <span className="text-[11px] text-blue-400 font-medium group-hover:underline">
+              <span className="text-[11px] text-[#001D39] font-medium group-hover:underline">
                 Work experience →
               </span>
             </Card>
@@ -316,15 +316,15 @@ export default function StudentDashboard() {
       {/* ─── Academic & Career Intelligence Details ─────────────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Academic Status Card */}
-        <Card className="p-6 bg-surface-900 border border-white/10">
+        <Card className="p-6 bg-white border border-[#BDD8E9]/70 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-accent-500/10 border border-accent-500/20 flex items-center justify-center text-lg">
+              <div className="w-10 h-10 rounded-xl bg-[#E1EFF8] text-[#0A4174] flex items-center justify-center text-lg font-bold">
                 🎓
               </div>
               <div>
-                <h3 className="font-semibold text-white text-base">Academic Intelligence Standing</h3>
-                <p className="text-xs text-slate-400">Verified institutional records and credit tracking</p>
+                <h3 className="font-semibold text-[#001D39] text-base">Academic Intelligence Standing</h3>
+                <p className="text-xs text-slate-500">Verified institutional records and credit tracking</p>
               </div>
             </div>
             <Badge
@@ -335,46 +335,46 @@ export default function StudentDashboard() {
             </Badge>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 p-3 bg-surface-800/40 rounded-xl border border-white/5">
+          <div className="grid grid-cols-3 gap-3 p-3 bg-[#F8FAFC] rounded-xl border border-slate-200">
             <div>
-              <div className="text-[11px] text-slate-400">Cumulative CGPA</div>
-              <div className="text-lg font-bold text-white font-mono mt-0.5">
+              <div className="text-[11px] text-slate-500">Cumulative CGPA</div>
+              <div className="text-lg font-bold text-[#001D39] font-mono mt-0.5">
                 {typeof cgpaValue === 'number' ? cgpaValue.toFixed(2) : cgpaValue} / 10.0
               </div>
             </div>
             <div>
-              <div className="text-[11px] text-slate-400">Active Backlogs</div>
-              <div className="text-lg font-bold text-emerald-400 font-mono mt-0.5">
+              <div className="text-[11px] text-slate-500">Active Backlogs</div>
+              <div className="text-lg font-bold text-emerald-700 font-mono mt-0.5">
                 {stats.academic?.activeBacklogs ?? 0}
               </div>
             </div>
             <div>
-              <div className="text-[11px] text-slate-400">Total Credits</div>
-              <div className="text-lg font-bold text-cyan-300 font-mono mt-0.5">
+              <div className="text-[11px] text-slate-500">Total Credits</div>
+              <div className="text-lg font-bold text-[#0A4174] font-mono mt-0.5">
                 {stats.academic?.totalCreditsEarned ?? 132}
               </div>
             </div>
           </div>
 
           <div className="mt-4 flex items-center justify-between text-xs">
-            <span className="text-slate-400">Department: {p?.department?.name || 'Computer Science & Engineering'}</span>
-            <Link to="/student/academics" className="text-primary-400 hover:underline">
-              Detailed Grades & Semesters →
+            <span className="text-slate-500">Department: {p?.department?.name || 'Computer Science & Engineering'}</span>
+            <Link to="/student/academics" className="text-[#0A4174] font-medium hover:underline">
+              Detailed Grades &amp; Semesters →
             </Link>
           </div>
         </Card>
 
         {/* Target Role & Skill Readiness */}
-        <Card className="p-6 bg-surface-900 border border-white/10">
+        <Card className="p-6 bg-white border border-[#BDD8E9]/70 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-primary-500/10 border border-primary-500/20 flex items-center justify-center text-lg">
+              <div className="w-10 h-10 rounded-xl bg-[#E1EFF8] text-[#0A4174] flex items-center justify-center text-lg">
                 🎯
               </div>
               <div>
-                <h3 className="font-semibold text-white text-base">Target Role & Preparation</h3>
-                <p className="text-xs text-slate-400">
-                  Target: <span className="text-white font-medium">{stats.career?.targetRole || 'Software Development Engineer'}</span>
+                <h3 className="font-semibold text-[#001D39] text-base">Target Role &amp; Preparation</h3>
+                <p className="text-xs text-slate-500">
+                  Target: <span className="text-[#001D39] font-medium">{stats.career?.targetRole || 'Software Development Engineer'}</span>
                 </p>
               </div>
             </div>
@@ -386,20 +386,20 @@ export default function StudentDashboard() {
           <div className="space-y-3">
             <div>
               <div className="flex justify-between text-xs mb-1">
-                <span className="text-slate-300">Role Preparedness Index</span>
-                <span className="text-emerald-400 font-semibold">{readinessScore}%</span>
+                <span className="text-slate-600 font-medium">Role Preparedness Index</span>
+                <span className="text-emerald-700 font-bold">{readinessScore}%</span>
               </div>
-              <div className="w-full bg-surface-800 rounded-full h-2 overflow-hidden border border-white/5">
+              <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
                 <div
-                  className="bg-gradient-to-r from-primary-500 to-emerald-400 h-2 rounded-full"
+                  className="bg-[#0A4174] h-2 rounded-full"
                   style={{ width: `${readinessScore}%` }}
                 />
               </div>
             </div>
 
-            <div className="p-3 bg-surface-800/40 rounded-xl border border-white/5 text-xs text-slate-300 flex items-center justify-between">
-              <span>Ready for technical interviews & coding challenges.</span>
-              <Link to="/student/preparation" className="text-primary-400 hover:underline font-medium">
+            <div className="p-3 bg-[#F8FAFC] rounded-xl border border-slate-200 text-xs text-slate-600 flex items-center justify-between">
+              <span>Ready for technical interviews &amp; coding challenges.</span>
+              <Link to="/student/preparation" className="text-[#0A4174] hover:underline font-medium">
                 Preparation Hub →
               </Link>
             </div>

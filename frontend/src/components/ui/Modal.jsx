@@ -2,7 +2,8 @@ import { useEffect, useCallback } from 'react';
 import { clsx } from 'clsx';
 
 /**
- * Modal — accessible overlay dialog component.
+ * Modal — Career360 accessible overlay dialog component.
+ * Features: Clean white dialog, #001D39 header, #49769F close button, soft shadow.
  */
 export default function Modal({
   isOpen,
@@ -42,7 +43,7 @@ export default function Modal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-fade-in">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-[#001D39]/50 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -54,27 +55,30 @@ export default function Modal({
         aria-labelledby="modal-title"
         className={clsx(
           'relative w-full z-10 animate-slide-up',
-          'bg-surface-900 border border-white/10 rounded-2xl shadow-card',
+          'bg-white border border-slate-200 rounded-2xl shadow-xl',
           sizes[size],
           className,
         )}
       >
         {/* Header */}
         {(title || showClose) && (
-          <div className="flex items-center justify-between p-5 border-b border-white/10">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
             {title && (
-              <h2 id="modal-title" className="text-lg font-semibold text-white">
+              <h2
+                id="modal-title"
+                className="text-base font-bold text-[#001D39]"
+              >
                 {title}
               </h2>
             )}
             {showClose && (
               <button
                 onClick={onClose}
-                className="ml-auto p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="ml-auto p-1.5 rounded-lg text-[#49769F] hover:text-[#001D39] hover:bg-slate-100 transition-colors"
                 aria-label="Close modal"
               >
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             )}
@@ -82,8 +86,16 @@ export default function Modal({
         )}
 
         {/* Content */}
-        <div className="p-5">{children}</div>
+        <div className="p-6">{children}</div>
       </div>
     </div>
   );
 }
+
+Modal.Footer = function ModalFooter({ children, className = '' }) {
+  return (
+    <div className={clsx('flex items-center justify-end gap-3 pt-4 mt-6 border-t border-slate-100', className)}>
+      {children}
+    </div>
+  );
+};

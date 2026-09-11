@@ -156,15 +156,15 @@ export default function SkillsPage() {
       )}
 
       {/* Header Banner */}
-      <div className="glass p-6 bg-gradient-card border border-white/10 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="p-6 bg-white border border-[#BDD8E9]/70 rounded-2xl shadow-card flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h2 className="font-display font-bold text-2xl text-white">Skills & Competencies</h2>
-          <p className="text-slate-400 text-sm mt-1 max-w-xl">
+          <h2 className="font-display font-bold text-2xl text-[#001D39]">Skills & Competencies</h2>
+          <p className="text-slate-600 text-sm mt-1 max-w-xl">
             Highlight your technical toolkit, programming proficiencies, and professional skills for matching with company requirements.
           </p>
-          <div className="flex items-center gap-4 mt-3 text-xs text-slate-300">
-            <span>Total: <strong className="text-white">{skills.length}</strong></span>
-            <span>• Advanced/Expert: <strong className="text-accent-400">{skills.filter(s => ['ADVANCED', 'EXPERT'].includes(s.proficiency)).length}</strong></span>
+          <div className="flex items-center gap-4 mt-3 text-xs text-slate-500">
+            <span>Total: <strong className="text-[#001D39]">{skills.length}</strong></span>
+            <span>• Advanced/Expert: <strong className="text-[#4E8EA2]">{skills.filter(s => ['ADVANCED', 'EXPERT'].includes(s.proficiency)).length}</strong></span>
           </div>
         </div>
         <Button variant="primary" onClick={openAddModal} className="flex-shrink-0">
@@ -183,13 +183,13 @@ export default function SkillsPage() {
               onClick={() => setActiveCategory(cat.value)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all flex items-center gap-1.5 ${
                 isActive
-                  ? 'bg-primary-500 text-white shadow-glow'
-                  : 'bg-surface-900/80 text-slate-400 hover:text-white hover:bg-white/10 border border-white/5'
+                  ? 'bg-[#0A4174] text-white shadow-sm'
+                  : 'bg-white border border-[#BDD8E9]/70 text-slate-600 hover:text-[#001D39] hover:bg-slate-50'
               }`}
             >
               <span>{cat.label}</span>
               {count > 0 && (
-                <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${isActive ? 'bg-black/20 text-white' : 'bg-white/10 text-slate-300'}`}>
+                <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${isActive ? 'bg-black/20 text-white' : 'bg-[#BDD8E9]/40 text-[#0A4174] font-semibold'}`}>
                   {count}
                 </span>
               )}
@@ -223,15 +223,15 @@ export default function SkillsPage() {
             return (
               <div
                 key={skill.id}
-                className="glass p-5 rounded-2xl border border-white/10 hover:border-primary-500/30 transition-all group flex flex-col justify-between"
+                className="p-5 bg-white rounded-2xl border border-[#BDD8E9]/70 shadow-card hover:border-[#0A4174]/40 transition-all group flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <h3 className="font-semibold text-white text-base group-hover:text-primary-300 transition-colors">
+                      <h3 className="font-semibold text-[#001D39] text-base group-hover:text-[#0A4174] transition-colors">
                         {skill.name}
                       </h3>
-                      <span className="text-[11px] text-slate-400">
+                      <span className="text-[11px] text-slate-500">
                         {skill.category.replace('_', ' ')}
                       </span>
                     </div>
@@ -242,20 +242,20 @@ export default function SkillsPage() {
 
                   {/* Proficiency Meter */}
                   <div className="mt-4">
-                    <div className="flex justify-between text-[11px] text-slate-400 mb-1">
+                    <div className="flex justify-between text-[11px] text-slate-500 mb-1">
                       <span>Proficiency</span>
-                      <span className="font-medium text-slate-300">{profMeta.percent}%</span>
+                      <span className="font-medium text-[#001D39]">{profMeta.percent}%</span>
                     </div>
-                    <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
                       <div
                         className={`h-full transition-all duration-500 rounded-full ${
                           profMeta.color === 'success'
-                            ? 'bg-accent-400'
+                            ? 'bg-emerald-500'
                             : profMeta.color === 'primary'
-                            ? 'bg-primary-500'
+                            ? 'bg-[#0A4174]'
                             : profMeta.color === 'purple'
-                            ? 'bg-purple-500'
-                            : 'bg-slate-400'
+                            ? 'bg-[#4E8EA2]'
+                            : 'bg-[#49769F]'
                         }`}
                         style={{ width: `${profMeta.percent}%` }}
                       />
@@ -263,24 +263,24 @@ export default function SkillsPage() {
                   </div>
 
                   {skill.evidence && (
-                    <p className="mt-3 text-xs text-slate-400 line-clamp-2 bg-white/5 p-2 rounded-lg border border-white/5">
+                    <p className="mt-3 text-xs text-slate-600 line-clamp-2 bg-[#F4F7FB] p-2 rounded-lg border border-[#BDD8E9]/50">
                       💡 {skill.evidence}
                     </p>
                   )}
                 </div>
 
                 {/* Actions */}
-                <div className="flex items-center justify-end gap-2 mt-4 pt-3 border-t border-white/5">
+                <div className="flex items-center justify-end gap-2 mt-4 pt-3 border-t border-slate-100">
                   <button
                     onClick={() => openEditModal(skill)}
-                    className="p-1.5 text-xs text-slate-400 hover:text-primary-400 hover:bg-white/5 rounded-lg transition-colors"
+                    className="p-1.5 text-xs text-slate-500 hover:text-[#0A4174] hover:bg-slate-100 rounded-lg transition-colors"
                     title="Edit Skill"
                   >
                     Edit ✏️
                   </button>
                   <button
                     onClick={() => setDeletingSkill(skill)}
-                    className="p-1.5 text-xs text-slate-400 hover:text-danger-400 hover:bg-danger-500/10 rounded-lg transition-colors"
+                    className="p-1.5 text-xs text-slate-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
                     title="Delete Skill"
                   >
                     Delete 🗑️
@@ -326,11 +326,11 @@ export default function SkillsPage() {
           />
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-slate-300">
+            <label className="text-sm font-medium text-slate-700">
               Evidence / Proof (Optional)
             </label>
             <textarea
-              className="w-full rounded-xl bg-white/5 border border-white/10 text-sm text-white placeholder-slate-500 p-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+              className="w-full rounded-xl bg-white border border-slate-300 text-sm text-[#001D39] placeholder-slate-400 p-3 focus:outline-none focus:ring-2 focus:ring-[#0A4174]"
               rows={2}
               value={form.evidence}
               onChange={(e) => setForm({ ...form, evidence: e.target.value })}
@@ -338,7 +338,7 @@ export default function SkillsPage() {
             />
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
             <Button
               type="button"
               variant="outline"
@@ -362,7 +362,7 @@ export default function SkillsPage() {
         size="sm"
       >
         <div className="space-y-4">
-          <p className="text-sm text-slate-300">
+          <p className="text-sm text-slate-600">
             Are you sure you want to remove <strong>{deletingSkill?.name}</strong> from your profile?
           </p>
           <div className="flex justify-end gap-3 pt-2">

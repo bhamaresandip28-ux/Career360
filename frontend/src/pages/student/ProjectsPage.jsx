@@ -190,16 +190,16 @@ export default function ProjectsPage() {
       )}
 
       {/* Header Banner */}
-      <div className="glass p-6 bg-gradient-card border border-white/10 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="p-6 bg-white border border-[#BDD8E9]/70 rounded-2xl shadow-card flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h2 className="font-display font-bold text-2xl text-white">Project Showcase</h2>
-          <p className="text-slate-400 text-sm mt-1 max-w-xl">
+          <h2 className="font-display font-bold text-2xl text-[#001D39]">Project Showcase</h2>
+          <p className="text-slate-600 text-sm mt-1 max-w-xl">
             Real-world projects validate your problem-solving, architectural skills, and tool expertise for recruitment drives.
           </p>
-          <div className="flex items-center gap-4 mt-3 text-xs text-slate-300">
-            <span>Total Projects: <strong className="text-white">{projects.length}</strong></span>
-            <span>• Team: <strong className="text-primary-400">{projects.filter(p => p.isTeam).length}</strong></span>
-            <span>• Solo: <strong className="text-purple-400">{projects.filter(p => !p.isTeam).length}</strong></span>
+          <div className="flex items-center gap-4 mt-3 text-xs text-slate-500">
+            <span>Total Projects: <strong className="text-[#001D39]">{projects.length}</strong></span>
+            <span>• Team: <strong className="text-[#0A4174]">{projects.filter(p => p.isTeam).length}</strong></span>
+            <span>• Solo: <strong className="text-[#4E8EA2]">{projects.filter(p => !p.isTeam).length}</strong></span>
           </div>
         </div>
         <Button variant="primary" onClick={openAddModal} className="flex-shrink-0">
@@ -218,13 +218,13 @@ export default function ProjectsPage() {
               onClick={() => setActiveCategory(cat.value)}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all flex items-center gap-1.5 ${
                 isActive
-                  ? 'bg-primary-500 text-white shadow-glow'
-                  : 'bg-surface-900/80 text-slate-400 hover:text-white hover:bg-white/10 border border-white/5'
+                  ? 'bg-[#0A4174] text-white shadow-sm'
+                  : 'bg-white border border-[#BDD8E9]/70 text-slate-600 hover:text-[#001D39] hover:bg-slate-50'
               }`}
             >
               <span>{cat.label}</span>
               {count > 0 && (
-                <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${isActive ? 'bg-black/20 text-white' : 'bg-white/10 text-slate-300'}`}>
+                <span className={`px-1.5 py-0.2 rounded-full text-[10px] ${isActive ? 'bg-black/20 text-white' : 'bg-[#BDD8E9]/40 text-[#0A4174] font-semibold'}`}>
                   {count}
                 </span>
               )}
@@ -256,12 +256,12 @@ export default function ProjectsPage() {
           {filteredProjects.map((proj) => (
             <div
               key={proj.id}
-              className="glass p-6 rounded-2xl border border-white/10 hover:border-primary-500/30 transition-all flex flex-col justify-between"
+              className="p-6 bg-white rounded-2xl border border-[#BDD8E9]/70 shadow-card hover:border-[#0A4174]/40 transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h3 className="font-semibold text-white text-lg leading-snug">
+                    <h3 className="font-semibold text-[#001D39] text-lg leading-snug">
                       {proj.title}
                     </h3>
                     <div className="flex items-center gap-2 mt-1 flex-wrap">
@@ -269,22 +269,22 @@ export default function ProjectsPage() {
                         {proj.category.replace('_', ' ')}
                       </Badge>
                       {proj.isTeam ? (
-                        <Badge variant="purple" size="sm">
+                        <Badge variant="teal" size="sm">
                           Team {proj.teamSize ? `(${proj.teamSize})` : ''}
                         </Badge>
                       ) : (
                         <Badge variant="slate" size="sm">Solo</Badge>
                       )}
                       {proj.role && (
-                        <span className="text-xs text-slate-400">
-                          Role: <strong className="text-slate-200 font-medium">{proj.role}</strong>
+                        <span className="text-xs text-slate-500">
+                          Role: <strong className="text-[#001D39] font-medium">{proj.role}</strong>
                         </span>
                       )}
                     </div>
                   </div>
                 </div>
 
-                <p className="mt-3 text-sm text-slate-300 leading-relaxed">
+                <p className="mt-3 text-sm text-slate-600 leading-relaxed">
                   {proj.description}
                 </p>
 
@@ -294,7 +294,7 @@ export default function ProjectsPage() {
                     {proj.techStack.map((tech, i) => (
                       <span
                         key={i}
-                        className="px-2 py-0.5 rounded-lg bg-white/5 border border-white/10 text-[11px] text-slate-300 font-mono"
+                        className="px-2 py-0.5 rounded-lg bg-[#BDD8E9]/20 border border-[#BDD8E9]/60 text-[11px] text-[#0A4174] font-mono font-medium"
                       >
                         {tech}
                       </span>
@@ -304,14 +304,14 @@ export default function ProjectsPage() {
               </div>
 
               {/* Footer Links & Actions */}
-              <div className="flex items-center justify-between mt-5 pt-4 border-t border-white/5 flex-wrap gap-2">
+              <div className="flex items-center justify-between mt-5 pt-4 border-t border-slate-100 flex-wrap gap-2">
                 <div className="flex items-center gap-3">
                   {proj.githubUrl && (
                     <a
                       href={proj.githubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-xs text-slate-300 hover:text-white flex items-center gap-1.5 font-medium transition-colors"
+                      className="text-xs text-slate-600 hover:text-[#0A4174] flex items-center gap-1.5 font-medium transition-colors"
                     >
                       <span>🐙 Code</span>
                     </a>
@@ -321,7 +321,7 @@ export default function ProjectsPage() {
                       href={proj.liveUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-xs text-accent-400 hover:text-accent-300 flex items-center gap-1.5 font-medium transition-colors"
+                      className="text-xs text-[#0A4174] hover:text-[#001D39] flex items-center gap-1.5 font-semibold transition-colors"
                     >
                       <span>🌐 Live Demo</span>
                     </a>
@@ -331,13 +331,13 @@ export default function ProjectsPage() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => openEditModal(proj)}
-                    className="text-xs text-slate-400 hover:text-primary-400 p-1.5 transition-colors"
+                    className="text-xs text-slate-500 hover:text-[#0A4174] p-1.5 transition-colors"
                   >
                     Edit ✏️
                   </button>
                   <button
                     onClick={() => setDeletingProject(proj)}
-                    className="text-xs text-slate-400 hover:text-danger-400 p-1.5 transition-colors"
+                    className="text-xs text-slate-500 hover:text-rose-600 p-1.5 transition-colors"
                   >
                     Delete 🗑️
                   </button>
@@ -383,11 +383,11 @@ export default function ProjectsPage() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-slate-300">
+            <label className="text-sm font-medium text-slate-700">
               Project Description <span className="text-danger-400">*</span>
             </label>
             <textarea
-              className="w-full rounded-xl bg-white/5 border border-white/10 text-sm text-white placeholder-slate-500 p-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+              className="w-full rounded-xl bg-white border border-slate-300 text-sm text-[#001D39] placeholder-slate-400 p-3 focus:outline-none focus:ring-2 focus:ring-[#0A4174]"
               rows={3}
               required
               value={form.description}
@@ -405,15 +405,15 @@ export default function ProjectsPage() {
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="flex items-center gap-3 p-3 bg-white/5 rounded-xl border border-white/5">
+            <div className="flex items-center gap-3 p-3 bg-[#F4F7FB] rounded-xl border border-[#BDD8E9]/60">
               <input
                 type="checkbox"
                 id="isTeam"
                 checked={form.isTeam}
                 onChange={(e) => setForm({ ...form, isTeam: e.target.checked })}
-                className="w-4 h-4 rounded text-primary-500 focus:ring-primary-500"
+                className="w-4 h-4 rounded text-[#0A4174] focus:ring-[#0A4174]"
               />
-              <label htmlFor="isTeam" className="text-sm font-medium text-slate-300 cursor-pointer">
+              <label htmlFor="isTeam" className="text-sm font-medium text-slate-700 cursor-pointer">
                 Team Project
               </label>
             </div>
@@ -450,7 +450,7 @@ export default function ProjectsPage() {
             />
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+          <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
             <Button
               type="button"
               variant="outline"
@@ -474,7 +474,7 @@ export default function ProjectsPage() {
         size="sm"
       >
         <div className="space-y-4">
-          <p className="text-sm text-slate-300">
+          <p className="text-sm text-slate-600">
             Are you sure you want to delete project <strong>{deletingProject?.title}</strong>?
           </p>
           <div className="flex justify-end gap-3 pt-2">
