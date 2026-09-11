@@ -1,0 +1,30 @@
+CAREER360 PROJECT STATE
+
+AUTHORITATIVE SCOPE
+Career360 = Student Academic, Skill and Placement Intelligence Platform.
+
+KEEP:
+Student, Academic Intelligence, Career Intelligence, Placement Portal, Resume/Professional Profile, Preparation Hub, Placement Coordinator, Faculty, Placement Analytics, Industry Skill Analytics, Gamification, Notifications, Reports, Security.
+
+REMOVED:
+Automatic Student Portfolio Generator
+AI Mock Interview
+Anonymous Peer Benchmarking
+Alumni Intelligence
+Opportunity Recommendation System
+
+CURRENT DOCUMENTATION SET:
+PRD, FRD, TRD, UI/UX Specification, Database Schema, API Specification, AI Requirements, HLD, User Stories & Acceptance Criteria, System Flow, Test Plan, Project Scope/Roadmap.
+
+BUILD RULES:
+1. Do not silently add removed features.
+2. Do not change architecture or data contracts without documenting the decision.
+3. Complete and test one phase before starting the next.
+4. Keep the database as the single source of truth.
+5. AI must not invent student data or guarantee placement.
+6. Eligibility and suitability/matching are different concepts.
+7. Keep the system modular, scalable and flexible.
+8. Update this file after every completed phase.
+
+NEXT:
+Begin Phase 0 — Foundation.

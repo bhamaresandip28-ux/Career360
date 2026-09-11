@@ -1,0 +1,854 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Career360 — Prisma Schema
+// Phase 2: Student Profile & Student Data
+// (includes all Phase 1 models)
+// ─────────────────────────────────────────────────────────────────────────────
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────────────────────────────────────
+
+enum Role {
+  STUDENT
+  FACULTY
+  PLACEMENT_COORDINATOR
+  ADMIN
+}
+
+enum AccountStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum SkillCategory {
+  PROGRAMMING
+  WEB_DEVELOPMENT
+  DATABASE
+  CLOUD
+  DEVOPS
+  AI_ML
+  TOOLS
+  SOFT_SKILLS
+  OTHER
+}
+
+enum SkillProficiency {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum ProjectCategory {
+  WEB
+  MOBILE
+  DESKTOP
+  DATA_SCIENCE
+  AI_ML
+  IOT
+  GAME
+  OTHER
+}
+
+enum AchievementCategory {
+  HACKATHON
+  COMPETITION
+  AWARD
+  LEADERSHIP
+  PUBLICATION
+  SPORTS
+  CULTURAL
+  OTHER
+}
+
+enum ProfessionalPlatform {
+  LINKEDIN
+  GITHUB
+  PORTFOLIO
+  LEETCODE
+  CODECHEF
+  HACKERRANK
+  CODEFORCES
+  KAGGLE
+  OTHER
+}
+
+enum DriveStatus {
+  UPCOMING
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum ApplicationStatus {
+  APPLIED
+  SHORTLISTED
+  INTERVIEW_SCHEDULED
+  REJECTED
+  OFFERED
+  ACCEPTED
+  DECLINED
+}
+
+enum RoundStatus {
+  SCHEDULED
+  CLEARED
+  ELIMINATED
+  ABSENT
+}
+
+enum OutcomeStatus {
+  ACCEPTED
+  REJECTED
+}
+
+enum RoleImportance {
+  CRITICAL
+  IMPORTANT
+  NICE_TO_HAVE
+}
+
+enum RoadmapCategory {
+  ACADEMIC
+  SKILL
+  PROJECT
+  INTERNSHIP
+  CERTIFICATION
+  PREPARATION
+}
+
+enum RoadmapPriority {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum RoadmapStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum PrepCategory {
+  DSA
+  SYSTEM_DESIGN
+  APTITUDE
+  CORE_CS
+  BEHAVIORAL
+  MOCK_TEST
+}
+
+enum PrepDifficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum PrepProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum NotificationType {
+  INFO
+  SUCCESS
+  WARNING
+  ACADEMIC_ALERT
+  DRIVE_ANNOUNCEMENT
+  INTERVIEW_ROUND
+  OFFER_ISSUED
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// IDENTITY & ACCESS (Phase 1)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Core user account — identity and authentication only.
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  passwordHash String
+  role         Role          @default(STUDENT)
+  status       AccountStatus @default(ACTIVE)
+
+  refreshTokenHash    String?
+  passwordResetTokens PasswordResetToken[]
+
+  // Phase 2 relations
+  studentProfile    StudentProfile?
+  skills            Skill[]
+  projects          Project[]
+  certifications    Certification[]
+  internships       Internship[]
+  achievements      Achievement[]
+  professionalLinks ProfessionalLink[]
+  careerPreference  CareerPreference?
+
+  // Phase 3 relations
+  academicSemesters     AcademicSemester[]
+  studentSubjectRecords StudentSubjectRecord[]
+
+  // Phase 4 relations
+  applications      Application[]
+  selectionRounds   SelectionRound[]
+  placementOutcomes PlacementOutcome[]
+
+  // Phase 6 relations
+  studentTargetRoles  StudentTargetRole[]
+  roadmapItems        CareerRoadmapItem[]
+  preparationProgress PreparationProgress[]
+
+  // Phase 7 relations
+  notifications       Notification[]
+  auditLogs           AuditLog[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("password_reset_tokens")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ORGANIZATION (Phase 2)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Academic department (e.g. Computer Science, Information Technology)
+model Department {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  code        String  @unique
+  description String?
+
+  batches         Batch[]
+  studentProfiles StudentProfile[]
+  subjects        Subject[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("departments")
+}
+
+/// Graduation batch / cohort (e.g. 2024-2028)
+model Batch {
+  id           String @id @default(cuid())
+  year         Int    // Graduation year e.g. 2027
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+
+  studentProfiles StudentProfile[]
+
+  createdAt DateTime @default(now())
+
+  @@unique([year, departmentId])
+  @@map("batches")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// STUDENT PROFILE (Phase 2)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Extended student profile — 1:1 with User
+model StudentProfile {
+  id               String  @id @default(cuid())
+  userId           String  @unique
+  user             User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  rollNumber       String?  @unique
+  phone            String?
+  gender           Gender?
+  dateOfBirth      DateTime?
+  address          String?
+  profilePhotoUrl  String?
+
+  departmentId     String?
+  department       Department? @relation(fields: [departmentId], references: [id])
+  batchId          String?
+  batch            Batch?      @relation(fields: [batchId], references: [id])
+  currentSemester  Int?
+  admissionYear    Int?
+
+  // Computed fields (cached, recalculated on data change)
+  cgpa             Float?
+  latestSgpa       Float?
+  totalBacklogs    Int    @default(0)
+  activeBacklogs   Int    @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("student_profiles")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// STUDENT DATA (Phase 2)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Student's skills
+model Skill {
+  id          String           @id @default(cuid())
+  userId      String
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name        String
+  category    SkillCategory
+  proficiency SkillProficiency
+  evidence    String?          // Description or link to proof
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, name]) // Prevent duplicate skill names per student
+  @@map("skills")
+}
+
+/// Student's projects
+model Project {
+  id          String          @id @default(cuid())
+  userId      String
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title       String
+  description String
+  techStack   String[]
+  role        String?         // e.g. "Frontend Developer"
+  category    ProjectCategory @default(OTHER)
+  isTeam      Boolean         @default(false)
+  teamSize    Int?
+
+  startDate   DateTime?
+  endDate     DateTime?       // null = ongoing
+
+  githubUrl   String?
+  liveUrl     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("projects")
+}
+
+/// Student's certifications
+model Certification {
+  id               String    @id @default(cuid())
+  userId           String
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name             String
+  issuingOrg       String
+  issueDate        DateTime
+  expiryDate       DateTime?
+  credentialId     String?
+  verificationUrl  String?
+  fileUrl          String?   // Uploaded certificate file
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("certifications")
+}
+
+/// Student's internships
+model Internship {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  organization    String
+  role            String
+  startDate       DateTime
+  endDate         DateTime? // null = ongoing
+  description     String?
+  techStack       String[]
+  certificateUrl  String?
+  verificationUrl String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("internships")
+}
+
+/// Student's achievements
+model Achievement {
+  id          String              @id @default(cuid())
+  userId      String
+  user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title       String
+  category    AchievementCategory
+  description String?
+  date        DateTime
+  proofUrl    String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("achievements")
+}
+
+/// Student's professional profile links
+model ProfessionalLink {
+  id       String               @id @default(cuid())
+  userId   String
+  user     User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  platform ProfessionalPlatform
+  url      String
+  isPublic Boolean              @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, platform]) // One link per platform per student
+  @@map("professional_links")
+}
+
+/// Student's career preferences and goals
+model CareerPreference {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  targetRole        String?
+  careerInterests   String[] // e.g. ["Web Development", "Cloud Computing"]
+  preferredLocation String?
+  careerGoals       String?  // Free text
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@map("career_preferences")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ACADEMICS (Phase 3)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Academic semester record for a student
+model AcademicSemester {
+  id             String   @id @default(cuid())
+  userId         String
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  semesterNumber Int      // 1 to 8
+  academicYear   String   // e.g. "2024-2025"
+  sgpa           Float?
+  totalCredits   Int?     @default(0)
+
+  subjectRecords StudentSubjectRecord[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, semesterNumber])
+  @@map("academic_semesters")
+}
+
+/// Academic subject / course
+model Subject {
+  id           String      @id @default(cuid())
+  code         String      @unique // e.g. "CS301"
+  name         String
+  credits      Int         @default(3)
+  departmentId String?
+  department   Department? @relation(fields: [departmentId], references: [id])
+
+  subjectRecords StudentSubjectRecord[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("subjects")
+}
+
+/// Student's grade, marks, attendance, and backlog record in a subject
+model StudentSubjectRecord {
+  id            String           @id @default(cuid())
+  userId        String
+  user          User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  semesterId    String
+  semester      AcademicSemester @relation(fields: [semesterId], references: [id], onDelete: Cascade)
+
+  subjectId     String
+  subject       Subject          @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  marksObtained Float?
+  maxMarks      Float            @default(100)
+  grade         String?          // "O", "A+", "A", "B+", "B", "C", "F"
+  attendance    Float?           // percentage e.g. 84.5
+  isBacklog     Boolean          @default(false)
+  clearedAt     DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, semesterId, subjectId])
+  @@map("student_subject_records")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PLACEMENT CORE (Phase 4)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Recruiting company / employer
+model Company {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  industry    String   // e.g. "Software / Technology", "Fintech", "Consulting"
+  website     String?
+  description String?
+  location    String?  // e.g. "Bangalore / Hybrid"
+  logoUrl     String?
+
+  jobs        JobOpening[]
+  drives      PlacementDrive[]
+  outcomes    PlacementOutcome[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("companies")
+}
+
+/// Job opening / role within a company
+model JobOpening {
+  id             String   @id @default(cuid())
+  companyId      String
+  company        Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  title          String   // e.g. "Associate Software Engineer"
+  description    String?
+  role           String   // e.g. "Full Stack Developer"
+  packageMin     Float?   // LPA e.g. 8.0
+  packageMax     Float?   // LPA e.g. 14.0
+  location       String?
+  employmentType String   @default("Full-time") // "Full-time", "Intern + FTE", "Internship"
+  requiredSkills String[]
+
+  drives         PlacementDrive[]
+  outcomes       PlacementOutcome[]
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("job_openings")
+}
+
+/// Placement drive scheduled for a specific company job
+model PlacementDrive {
+  id               String      @id @default(cuid())
+  companyId        String
+  company          Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  jobId            String
+  job              JobOpening  @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  title            String      // e.g. "Microsoft Campus Hiring 2025"
+  openDate         DateTime
+  deadline         DateTime
+  selectionProcess String?     // e.g. "Online Assessment -> Technical Round 1 -> Technical Round 2 -> HR"
+  status           DriveStatus @default(ACTIVE)
+
+  eligibilityRule  EligibilityRule?
+  applications     Application[]
+  rounds           SelectionRound[]
+
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  @@map("placement_drives")
+}
+
+/// Structured eligibility criteria for a placement drive
+model EligibilityRule {
+  id                     String         @id @default(cuid())
+  driveId                String         @unique
+  drive                  PlacementDrive @relation(fields: [driveId], references: [id], onDelete: Cascade)
+
+  departments            String[]       // e.g. ["CS", "IT"]
+  minCgpa                Float          @default(6.0)
+  maxActiveBacklogs      Int            @default(0)
+  maxTotalBacklogs       Int            @default(2)
+  minAttendance          Float          @default(75.0)
+  allowedGraduationYears Int[]          // e.g. [2025, 2026, 2027]
+  requiredSkills         String[]
+
+  createdAt              DateTime       @default(now())
+  updatedAt              DateTime       @updatedAt
+
+  @@map("eligibility_rules")
+}
+
+/// Student's application for a placement drive
+model Application {
+  id              String            @id @default(cuid())
+  studentId       String
+  student         User              @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  driveId         String
+  drive           PlacementDrive    @relation(fields: [driveId], references: [id], onDelete: Cascade)
+
+  status          ApplicationStatus @default(APPLIED)
+  appliedAt       DateTime          @default(now())
+  resumeUrl       String?
+  notes           String?
+
+  selectionRounds SelectionRound[]
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@unique([studentId, driveId])
+  @@map("applications")
+}
+
+/// Interview / Assessment round for a drive
+model SelectionRound {
+  id            String         @id @default(cuid())
+  driveId       String
+  drive         PlacementDrive @relation(fields: [driveId], references: [id], onDelete: Cascade)
+  applicationId String?
+  application   Application?   @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  studentId     String
+  student       User           @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  roundNumber   Int            // 1, 2, 3...
+  roundName     String         // "Online Coding Test", "Technical Interview", "HR Round"
+  scheduledAt   DateTime?
+  venueOrLink   String?
+  status        RoundStatus    @default(SCHEDULED)
+  feedback      String?
+
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@map("selection_rounds")
+}
+
+/// Final placement offer / outcome
+model PlacementOutcome {
+  id             String        @id @default(cuid())
+  studentId      String
+  student        User          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  companyId      String
+  company        Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  jobId          String
+  job            JobOpening    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  packageOffered Float         // LPA e.g. 12.5
+  status         OutcomeStatus @default(ACCEPTED)
+  offerLetterUrl String?
+  acceptedAt     DateTime      @default(now())
+
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@map("placement_outcomes")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SYSTEM UTILITY (Phase 1)
+// ─────────────────────────────────────────────────────────────────────────────
+
+model SystemConfig {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("system_config")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CAREER INTELLIGENCE & PREPARATION (Phase 6)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Standard industry job role benchmark (e.g., Full Stack Engineer, Cloud Architect)
+model TargetRole {
+  id             String   @id @default(cuid())
+  name           String   // e.g. "Full Stack Developer"
+  slug           String   @unique // "full-stack-developer"
+  description    String
+  minCgpa        Float    @default(6.5)
+  averageCtcLpa  Float    // e.g. 10.5 LPA
+  isActive       Boolean  @default(true)
+
+  roleSkills         RoleSkill[]
+  studentTargetRoles StudentTargetRole[]
+  roadmapItems       CareerRoadmapItem[]
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("target_roles")
+}
+
+/// Key skill required or recommended for a target role
+model RoleSkill {
+  id             String           @id @default(cuid())
+  targetRoleId   String
+  targetRole     TargetRole       @relation(fields: [targetRoleId], references: [id], onDelete: Cascade)
+
+  name           String           // e.g. "React", "Node.js", "Docker"
+  category       SkillCategory    @default(WEB_DEVELOPMENT)
+  importance     RoleImportance   @default(IMPORTANT)
+  minProficiency SkillProficiency @default(INTERMEDIATE)
+
+  createdAt      DateTime         @default(now())
+
+  @@map("role_skills")
+}
+
+/// Student's chosen target role benchmark
+model StudentTargetRole {
+  id           String     @id @default(cuid())
+  studentId    String
+  student      User       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  targetRoleId String
+  targetRole   TargetRole @relation(fields: [targetRoleId], references: [id], onDelete: Cascade)
+
+  isPrimary    Boolean    @default(true)
+
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([studentId, targetRoleId])
+  @@map("student_target_roles")
+}
+
+/// Personalized milestone checklist item for student career progression
+model CareerRoadmapItem {
+  id           String          @id @default(cuid())
+  studentId    String
+  student      User            @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  targetRoleId String?
+  targetRole   TargetRole?     @relation(fields: [targetRoleId], references: [id], onDelete: SetNull)
+
+  title        String
+  description  String?
+  category     RoadmapCategory @default(SKILL)
+  priority     RoadmapPriority @default(MEDIUM)
+  status       RoadmapStatus   @default(PENDING)
+  dueDate      DateTime?
+  completedAt  DateTime?
+
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+
+  @@map("career_roadmap_items")
+}
+
+/// Curated preparation guide, coding list, or conceptual module
+model PreparationResource {
+  id             String         @id @default(cuid())
+  title          String
+  description    String
+  category       PrepCategory   @default(DSA)
+  difficulty     PrepDifficulty @default(MEDIUM)
+  estimatedHours Int            @default(4)
+  contentUrl     String?
+  tags           String[]       @default([])
+  order          Int            @default(0)
+
+  studentProgress PreparationProgress[]
+
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@map("preparation_resources")
+}
+
+/// Student's completion status & notes on a preparation module
+model PreparationProgress {
+  id          String              @id @default(cuid())
+  studentId   String
+  student     User                @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  resourceId  String
+  resource    PreparationResource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+
+  status      PrepProgressStatus  @default(NOT_STARTED)
+  notes       String?
+  completedAt DateTime?
+
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@unique([studentId, resourceId])
+  @@map("preparation_progress")
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NOTIFICATIONS & AUDIT LOGGING (Phase 7)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/// Persistent in-app user notifications
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title     String
+  message   String
+  type      NotificationType @default(INFO)
+  isRead    Boolean          @default(false)
+  linkUrl   String?
+  readAt    DateTime?
+
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@index([userId, isRead])
+  @@map("notifications")
+}
+
+/// System operational audit trail
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  action     String   // e.g. "USER_STATUS_TOGGLED", "APPLICATION_STATUS_UPDATED"
+  entityType String   // e.g. "User", "Application", "PlacementDrive"
+  entityId   String?
+  details    Json?
+  ipAddress  String?
+  userAgent  String?
+
+  createdAt  DateTime @default(now())
+
+  @@index([action])
+  @@index([entityType, entityId])
+  @@map("audit_logs")
+}
+
